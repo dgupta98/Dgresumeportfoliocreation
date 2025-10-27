@@ -21,6 +21,18 @@ function RecommendationCard({ rec, index }: { rec: Recommendation; index: number
     ? rec.text.substring(0, truncateLength) + "..." 
     : rec.text;
 
+  const handleMouseEnter = () => {
+    if (rec.expandable) {
+      setIsExpanded(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (rec.expandable) {
+      setIsExpanded(false);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -29,13 +41,13 @@ function RecommendationCard({ rec, index }: { rec: Recommendation; index: number
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <motion.div
-        className="bg-white/10 backdrop-blur-xl border border-slate-600 rounded-2xl p-6 h-full hover:border-blue-400 transition-all duration-300 relative overflow-hidden group cursor-pointer"
+        className="bg-white/10 backdrop-blur-xl border border-slate-600 rounded-2xl p-6 hover:border-blue-400 transition-all duration-300 relative overflow-hidden group cursor-pointer"
         whileHover={{ 
           y: -5,
           boxShadow: "0 20px 40px rgba(59, 130, 246, 0.2)"
         }}
-        onHoverStart={() => rec.expandable && setIsExpanded(true)}
-        onHoverEnd={() => rec.expandable && setIsExpanded(false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         style={{ transformStyle: "preserve-3d" }}
       >
         {/* 3D hover effect background */}
@@ -47,6 +59,28 @@ function RecommendationCard({ rec, index }: { rec: Recommendation; index: number
         </div>
 
         <div className="relative z-10">
+          {/* Author info - Now at the top */}
+          <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-slate-600">
+            <div className="flex-1">
+              <h4 className="text-white mb-1">{rec.name}</h4>
+              <p className="text-sm text-slate-400">{rec.role}</p>
+              <p className="text-sm text-blue-400">{rec.company}</p>
+              <p className="text-xs text-slate-500 mt-2">{rec.relationship}</p>
+            </div>
+            
+            <motion.a
+              href="https://www.linkedin.com/in/dipeshgupta09/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors shrink-0"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              title="View Dipesh's LinkedIn Profile"
+            >
+              <Linkedin className="h-5 w-5 text-white" />
+            </motion.a>
+          </div>
+
           {/* Stars */}
           <div className="flex gap-1 mb-4">
             {[...Array(5)].map((_, i) => (
@@ -55,7 +89,7 @@ function RecommendationCard({ rec, index }: { rec: Recommendation; index: number
           </div>
 
           {/* Recommendation text */}
-          <div className="mb-6">
+          <div>
             <AnimatePresence mode="wait">
               <motion.p
                 key={isExpanded ? "expanded" : "collapsed"}
@@ -78,28 +112,6 @@ function RecommendationCard({ rec, index }: { rec: Recommendation; index: number
                 <ChevronDown className="h-4 w-4" />
               </motion.div>
             )}
-          </div>
-
-          {/* Author info */}
-          <div className="flex items-start justify-between gap-4 pt-4 border-t border-slate-600">
-            <div className="flex-1">
-              <h4 className="text-white mb-1">{rec.name}</h4>
-              <p className="text-sm text-slate-400">{rec.role}</p>
-              <p className="text-sm text-blue-400">{rec.company}</p>
-              <p className="text-xs text-slate-500 mt-2">{rec.relationship}</p>
-            </div>
-            
-            <motion.a
-              href="https://www.linkedin.com/in/dipeshgupta09/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              title="View Dipesh's LinkedIn Profile"
-            >
-              <Linkedin className="h-5 w-5 text-white" />
-            </motion.a>
           </div>
         </div>
       </motion.div>
@@ -175,9 +187,9 @@ export function Recommendations() {
             <p className="text-slate-300 mt-4">What colleagues and mentors say</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 items-start">
             {recommendations.map((rec, index) => (
-              <RecommendationCard key={index} rec={rec} index={index} />
+              <RecommendationCard key={rec.name} rec={rec} index={index} />
             ))}
           </div>
 

@@ -3,6 +3,7 @@ import { Menu, X, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { Logo } from "./Logo";
 import { motion, AnimatePresence } from "motion/react";
+import { scrollToSection as scrollToSectionUtil } from "../utils/scrollToSection";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,17 +37,7 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80; // Account for fixed nav height
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-    }
+    scrollToSectionUtil(id);
     setIsMobileMenuOpen(false);
     setActiveSection(id);
   };

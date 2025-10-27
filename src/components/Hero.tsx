@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { NeuralBackground } from "./NeuralBackground";
 import { ResumeDownload } from "./ResumeDownload";
 import { useRef } from "react";
+import { scrollToSection } from "../utils/scrollToSection";
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -16,10 +17,6 @@ export function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
   const socialLinks = [
     { icon: Mail, href: "mailto:dgupta98@asu.edu", label: "Email" },
     { icon: Phone, href: "tel:+16234326768", label: "Phone" },
@@ -118,14 +115,6 @@ export function Hero() {
               className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg shadow-blue-500/30"
               size="lg"
             />
-            <Button
-              onClick={() => scrollToSection("contact")}
-              className="gap-2 shadow-lg"
-              size="lg"
-            >
-              <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
-              Get in Touch
-            </Button>
             <Button
               onClick={() => scrollToSection("projects")}
               variant="outline"
