@@ -129,7 +129,7 @@ export function Hero() {
             <Button
               onClick={() => scrollToSection("projects")}
               variant="outline"
-              className="border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white"
+              className="border-2 border-blue-400 text-blue-300 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-lg shadow-blue-500/20 backdrop-blur-sm bg-blue-950/30"
               size="lg"
             >
               View Projects
