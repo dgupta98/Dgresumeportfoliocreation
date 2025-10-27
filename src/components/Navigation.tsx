@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { Logo } from "./Logo";
@@ -8,6 +8,7 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,10 +36,44 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80; // Account for fixed nav height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
     setIsMobileMenuOpen(false);
     setActiveSection(id);
   };
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    if (isMobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
 
   const navItems = [
     { label: "Home", id: "home" },
@@ -53,10 +88,10 @@ export function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 ${
         isScrolled
-          ? "bg-slate-900/95 backdrop-blur-xl shadow-2xl shadow-blue-500/10 border-b border-slate-800"
-          : "bg-gradient-to-b from-slate-900/80 to-transparent backdrop-blur-sm"
+          ? "shadow-2xl shadow-blue-500/10 border-b border-slate-800"
+          : ""
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -126,18 +161,20 @@ export function Navigation() {
           </div>
 
           {/* Mobile Menu Button */}
-          <motion.div 
-            className="lg:hidden"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
+          <div className="lg:hidden">
             <Button
               variant="ghost"
               size="icon"
               className={`relative ${
                 isScrolled ? "text-slate-300" : "text-white"
-              } hover:text-blue-400 hover:bg-slate-800 transition-colors`}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              } hover:text-blue-400 hover:bg-slate-800 transition-colors touch-manipulation`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsMobileMenuOpen(!isMobileMenuOpen);
+              }}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
@@ -163,34 +200,40 @@ export function Navigation() {
                 )}
               </AnimatePresence>
             </Button>
-          </motion.div>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              ref={mobileMenuRef}
+              id="mobile-menu"
+              initial={{ maxHeight: 0, opacity: 0 }}
+              animate={{ maxHeight: "500px", opacity: 1 }}
+              exit={{ maxHeight: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
               className="lg:hidden overflow-hidden"
             >
-              <div className="py-4 space-y-1 bg-slate-900/50 backdrop-blur-xl border-t border-slate-800 rounded-b-2xl">
+              <div className="py-4 space-y-1 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border-t border-slate-800 rounded-b-2xl max-w-full">
                 {navItems.map((item, index) => (
-                  <motion.button
+                  <button
                     key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className={`flex items-center justify-between w-full text-left px-5 py-3.5 rounded-lg mx-2 transition-all duration-300 relative group ${
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      scrollToSection(item.id);
+                    }}
+                    className={`flex items-center justify-between w-full text-left px-5 py-3.5 rounded-lg mx-2 transition-all duration-200 relative group touch-manipulation active:scale-98 ${
                       activeSection === item.id
                         ? "text-blue-400 bg-blue-500/10 border border-blue-500/30"
-                        : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                        : "text-slate-300 active:text-white active:bg-slate-800/50"
                     }`}
-                    initial={{ x: -50, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: index * 0.05 }}
-                    whileHover={{ x: 4 }}
-                    whileTap={{ scale: 0.98 }}
+                    style={{
+                      WebkitTapHighlightColor: 'transparent',
+                      touchAction: 'manipulation'
+                    }}
+                    type="button"
                   >
                     <span className="relative z-10 font-medium">{item.label}</span>
                     
@@ -204,13 +247,11 @@ export function Navigation() {
                     
                     {/* Mobile active indicator */}
                     {activeSection === item.id && (
-                      <motion.span
+                      <span
                         className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-blue-500 to-cyan-400 rounded-r-full"
-                        layoutId="mobileActive"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                       />
                     )}
-                  </motion.button>
+                  </button>
                 ))}
               </div>
             </motion.div>

@@ -11,7 +11,7 @@ export function SEOHead() {
       { name: "keywords", content: "AI Engineer, ML Engineer, Backend Developer, Machine Learning, Deep Learning, Python, Java, Cloud Computing, AWS, GCP, Computer Vision, NLP, Software Engineer, IEEE Researcher" },
       { name: "author", content: "Dipesh Gupta" },
       { name: "robots", content: "index, follow" },
-      { name: "viewport", content: "width=device-width, initial-scale=1.0" },
+      { name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" },
       
       // Open Graph / Facebook
       { property: "og:type", content: "website" },

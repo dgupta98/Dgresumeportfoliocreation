@@ -1020,6 +1020,10 @@
     max-width: calc(100vw - 1rem);
   }
 
+  .max-w-full {
+    max-width: 100%;
+  }
+
   .max-w-md {
     max-width: var(--container-md);
   }
@@ -1082,6 +1086,10 @@
   .touch-pan-x {
     --tw-pan-x: pan-x;
     touch-action: var(--tw-pan-x, ) var(--tw-pan-y, ) var(--tw-pinch-zoom, );
+  }
+
+  .touch-manipulation {
+    touch-action: manipulation;
   }
 
   .snap-x {
@@ -1485,26 +1493,6 @@
     background-color: var(--color-slate-900);
   }
 
-  .bg-slate-900\/50 {
-    background-color: color-mix(in srgb, oklch(.208 .042 265.755) 50%, transparent);
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .bg-slate-900\/50 {
-      background-color: color-mix(in oklab, var(--color-slate-900) 50%, transparent);
-    }
-  }
-
-  .bg-slate-900\/95 {
-    background-color: color-mix(in srgb, oklch(.208 .042 265.755) 95%, transparent);
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .bg-slate-900\/95 {
-      background-color: color-mix(in oklab, var(--color-slate-900) 95%, transparent);
-    }
-  }
-
   .bg-white {
     background-color: var(--color-white);
   }
@@ -1663,17 +1651,6 @@
   .from-slate-900 {
     --tw-gradient-from: var(--color-slate-900);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
-
-  .from-slate-900\/80 {
-    --tw-gradient-from: color-mix(in srgb, oklch(.208 .042 265.755) 80%, transparent);
-    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .from-slate-900\/80 {
-      --tw-gradient-from: color-mix(in oklab, var(--color-slate-900) 80%, transparent);
-    }
   }
 
   .from-transparent {
@@ -2427,6 +2404,11 @@
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
 
+  .duration-200 {
+    --tw-duration: .2s;
+    transition-duration: .2s;
+  }
+
   .duration-300 {
     --tw-duration: .3s;
     transition-duration: .3s;
@@ -2602,18 +2584,6 @@
   }
 
   @media (hover: hover) {
-    .hover\:bg-slate-800\/50:hover {
-      background-color: color-mix(in srgb, oklch(.279 .041 260.031) 50%, transparent);
-    }
-
-    @supports (color: color-mix(in lab, red, red)) {
-      .hover\:bg-slate-800\/50:hover {
-        background-color: color-mix(in oklab, var(--color-slate-800) 50%, transparent);
-      }
-    }
-  }
-
-  @media (hover: hover) {
     .hover\:from-blue-700:hover {
       --tw-gradient-from: var(--color-blue-700);
       --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
@@ -2771,6 +2741,27 @@
     .focus-visible\:ring-ring\/50:focus-visible {
       --tw-ring-color: color-mix(in oklab, var(--ring) 50%, transparent);
     }
+  }
+
+  .active\:scale-98:active {
+    --tw-scale-x: 98%;
+    --tw-scale-y: 98%;
+    --tw-scale-z: 98%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+
+  .active\:bg-slate-800\/50:active {
+    background-color: color-mix(in srgb, oklch(.279 .041 260.031) 50%, transparent);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .active\:bg-slate-800\/50:active {
+      background-color: color-mix(in oklab, var(--color-slate-800) 50%, transparent);
+    }
+  }
+
+  .active\:text-white:active {
+    color: var(--color-white);
   }
 
   .disabled\:pointer-events-none:disabled {
@@ -3640,6 +3631,53 @@ button:focus-visible, a:focus-visible {
   button, a {
     min-width: 44px;
     min-height: 44px;
+  }
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html {
+  scroll-padding-top: 80px;
+}
+
+@media screen and (width <= 768px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+@media (width <= 1023px) {
+  .backdrop-blur-xl {
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+.active\:scale-98:active {
+  transform: scale(.98);
+}
+
+body {
+  overscroll-behavior-y: contain;
+}
+
+nav {
+  position: sticky;
+  transform: translateZ(0);
+}
+
+@supports (-webkit-touch-callout: none) {
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
   }
 }
 

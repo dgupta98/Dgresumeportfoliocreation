@@ -324,6 +324,66 @@ a:focus-visible {
   }
 }
 
+/* Improve touch interactions */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Smooth scrolling with offset for fixed nav */
+html {
+  scroll-padding-top: 80px;
+}
+
+/* Prevent iOS zoom on input focus */
+@media screen and (max-width: 768px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Better mobile menu performance */
+@media (max-width: 1023px) {
+  .backdrop-blur-xl {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* Touch feedback utility */
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+.active\:scale-98:active {
+  transform: scale(0.98);
+}
+
+/* Prevent pull-to-refresh on mobile when scrolling */
+body {
+  overscroll-behavior-y: contain;
+}
+
+/* Ensure fixed navigation works on all mobile browsers */
+nav {
+  position: -webkit-sticky;
+  position: sticky;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Fix for iOS Safari address bar issues */
+@supports (-webkit-touch-callout: none) {
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
 /* Print Stylesheet - Optimize for PDF generation */
 @media print {
   /* Reset page margins for better PDF output */
