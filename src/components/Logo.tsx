@@ -2,87 +2,87 @@ export function Logo() {
   return (
     <div className="relative group cursor-pointer">
       <svg
-        width="64"
-        height="64"
-        viewBox="0 0 400 400"
+        width="56"
+        height="56"
+        viewBox="0 0 200 200"
         xmlns="http://www.w3.org/2000/svg"
-        className="transition-all duration-500 group-hover:scale-110 drop-shadow-lg"
+        className="transition-all duration-500 group-hover:scale-110"
       >
         {/* Gradient definitions */}
         <defs>
-          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" style={{ stopColor: "#60a5fa", stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: "#3b82f6", stopOpacity: 1 }} />
+            <stop offset="50%" style={{ stopColor: "#3b82f6", stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: "#2563eb", stopOpacity: 1 }} />
           </linearGradient>
-          <linearGradient id="grad2" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" style={{ stopColor: "#3b82f6", stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: "#60a5fa", stopOpacity: 1 }} />
+          
+          {/* Animated gradient */}
+          <linearGradient id="animatedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: "#60a5fa", stopOpacity: 1 }}>
+              <animate attributeName="stop-color" values="#60a5fa;#3b82f6;#60a5fa" dur="3s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="100%" style={{ stopColor: "#2563eb", stopOpacity: 1 }}>
+              <animate attributeName="stop-color" values="#2563eb;#60a5fa;#2563eb" dur="3s" repeatCount="indefinite" />
+            </stop>
           </linearGradient>
-          <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{ stopColor: "#0f172a", stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: "#1e293b", stopOpacity: 1 }} />
-          </linearGradient>
+          
+          {/* Shadow/glow filter */}
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </defs>
         
-        {/* Background - matching portfolio theme */}
-        <rect width="400" height="400" fill="url(#bgGrad)" className="transition-all duration-300"/>
-        
-        {/* Decorative circles */}
-        <circle cx="200" cy="200" r="140" fill="none" stroke="url(#grad1)" strokeWidth="1.5" opacity="0.3" className="transition-all duration-500 group-hover:r-145 group-hover:opacity-50"/>
-        <circle cx="200" cy="200" r="120" fill="none" stroke="url(#grad2)" strokeWidth="1.5" opacity="0.4" className="transition-all duration-500 group-hover:r-125 group-hover:opacity-60"/>
-        
-        {/* Stylish italic bold D */}
-        <g transform="translate(200, 200)" className="transition-all duration-300 group-hover:scale-105">
+        {/* Stylish italic bold D with white gap */}
+        <g transform="translate(100, 100)" filter="url(#glow)">
+          {/* Outer D shape */}
           <path 
-            d="M -75 -65 L -50 -65 Q -10 -65 5 -42 Q 15 -22 15 0 Q 15 22 5 42 Q -10 65 -50 65 L -75 65 Z" 
-            fill="url(#grad1)" 
-            transform="skewX(-15)"
-            className="drop-shadow-lg"
+            d="M -50 -45 L -30 -45 Q 0 -45 12 -28 Q 18 -15 18 0 Q 18 15 12 28 Q 0 45 -30 45 L -50 45 Z" 
+            fill="url(#logoGrad)" 
+            transform="skewX(-12)"
+            className="transition-all duration-500 group-hover:fill-[url(#animatedGrad)]"
+            strokeWidth="2"
+            stroke="url(#logoGrad)"
+            strokeOpacity="0.6"
           />
+          {/* White gap in the middle */}
           <path 
-            d="M -68 -57 L -52 -57 Q -18 -57 -5 -38 Q 5 -20 5 0 Q 5 20 -5 38 Q -18 57 -52 57 L -68 57 Z" 
-            fill="url(#bgGrad)" 
-            transform="skewX(-15)"
+            d="M -42 -35 L -30 -35 Q -8 -35 2 -20 Q 8 -10 8 0 Q 8 10 2 20 Q -8 35 -30 35 L -42 35 Z" 
+            fill="white" 
+            transform="skewX(-12)"
           />
         </g>
         
-        {/* Stylish italic bold G */}
-        <g transform="translate(200, 200)" className="transition-all duration-300 group-hover:scale-105">
+        {/* Stylish italic bold G - proper G shape */}
+        <g transform="translate(100, 100)" filter="url(#glow)">
+          {/* Main G body - C shape with horizontal bar */}
           <path 
-            d="M 30 -65 Q 70 -65 88 -42 Q 100 -25 100 0 L 100 38 Q 100 65 70 65 Q 38 65 22 48 L 32 40 Q 43 53 62 53 Q 85 53 85 38 L 85 12 L 42 12 L 42 -2 L 100 -2 M 100 0 Q 100 -22 88 -38 Q 75 -55 50 -55 Q 22 -55 12 -32" 
-            fill="url(#grad2)" 
-            transform="skewX(-15)"
-            className="drop-shadow-lg"
+            d="M 55 -38 Q 70 -45 85 -38 Q 95 -30 95 -15 L 95 0 Q 95 15 90 25 Q 82 38 65 42 Q 50 45 35 38 Q 22 30 20 15 Q 18 0 20 -15 Q 22 -30 35 -38 Q 50 -45 65 -42 M 55 -30 Q 45 -26 40 -15 Q 38 -5 38 0 Q 38 5 40 15 Q 45 26 55 30 Q 65 33 73 28 Q 78 23 80 15 L 80 8 L 58 8 L 58 -2 L 88 -2 L 88 15 Q 86 25 78 32 Q 68 38 55 38 Q 40 35 32 23 Q 28 10 28 0 Q 28 -10 32 -23 Q 40 -35 55 -38 Z" 
+            fill="url(#logoGrad)" 
+            transform="skewX(-12)"
+            className="transition-all duration-500 group-hover:fill-[url(#animatedGrad)]"
+            strokeWidth="2"
+            stroke="url(#logoGrad)"
+            strokeOpacity="0.6"
           />
+          {/* Inner cutout for G */}
           <path 
-            d="M 36 -55 Q 65 -55 78 -38 Q 88 -22 88 0 L 88 35 Q 88 55 66 55 Q 43 55 30 43 L 37 37 Q 47 47 62 47 Q 75 47 75 35 L 75 8 L 47 8 L 47 2 L 88 2 M 88 0 Q 88 -20 78 -33 Q 68 -48 47 -48 Q 26 -48 17 -30" 
-            fill="url(#bgGrad)" 
-            transform="skewX(-15)"
+            d="M 55 -25 Q 48 -22 45 -12 Q 43 -3 43 0 Q 43 3 45 12 Q 48 22 55 25 Q 62 27 68 23 Q 72 19 73 12 L 73 3 L 62 3 L 62 2 L 80 2 L 80 12 Q 78 20 72 26 Q 65 31 55 31 Q 43 29 37 19 Q 34 8 34 0 Q 34 -8 37 -19 Q 43 -29 55 -31 Q 62 -32 68 -30 L 65 -25 Q 60 -27 55 -25 Z" 
+            fill="white" 
+            transform="skewX(-12)"
           />
         </g>
-        
-        {/* Elegant underline accent */}
-        <path 
-          d="M 80 280 Q 200 290 320 280" 
-          fill="none" 
-          stroke="url(#grad1)" 
-          strokeWidth="2.5" 
-          opacity="0.5"
-          className="transition-all duration-500 group-hover:opacity-80"
-        />
-        
-        {/* Small decorative dots */}
-        <circle cx="200" cy="90" r="3" fill="#60a5fa" opacity="0.7">
-          <animate attributeName="opacity" values="0.4;0.9;0.4" dur="3s" repeatCount="indefinite" />
-        </circle>
-        <circle cx="200" cy="310" r="3" fill="#3b82f6" opacity="0.7">
-          <animate attributeName="opacity" values="0.4;0.9;0.4" dur="3s" repeatCount="indefinite" begin="1.5s" />
-        </circle>
       </svg>
       
-      {/* Animated glow effect on hover */}
-      <div className="absolute inset-0 rounded-lg blur-2xl opacity-0 group-hover:opacity-40 transition-all duration-700 bg-gradient-to-r from-blue-500 to-blue-600 -z-10 scale-125">
-        <div className="w-full h-full animate-pulse" />
+      {/* Animated glow effect */}
+      <div className="absolute inset-0 rounded-full blur-2xl opacity-0 group-hover:opacity-60 transition-all duration-700 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 -z-10 scale-150 animate-pulse" />
+      
+      {/* Shimmer effect */}
+      <div className="absolute inset-0 overflow-hidden -z-10">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
       </div>
     </div>
   );

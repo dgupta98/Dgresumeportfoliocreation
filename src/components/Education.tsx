@@ -22,7 +22,7 @@ export function Education() {
     {
       degree: "Master of Science in Software Engineering",
       institution: "Arizona State University",
-      location: "Phoenix, Arizona",
+      location: "Arizona, US",
       period: "08/2025 - 05/2027",
       gpa: "4.0/4.0",
       status: "In Progress",
@@ -131,7 +131,7 @@ export function Education() {
                             <div className="flex flex-wrap items-center gap-3 text-sm text-slate-600">
                               <div className="flex items-center gap-1.5">
                                 <MapPin className="h-3.5 w-3.5 text-slate-600" />
-                                <span className={edu.location === "Phoenix, Arizona" ? "text-white" : ""}>{edu.location}</span>
+                                <span>{edu.location}</span>
                               </div>
                               <span className="text-slate-400">•</span>
                               <div className="flex items-center gap-1.5">

@@ -119,21 +119,21 @@ export function Skills() {
   };
 
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+    <section id="skills" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <CircuitPattern />
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <motion.div 
-            className="text-center mb-12"
+            className="text-center mb-12 sm:mb-16 lg:mb-20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl tracking-tight bg-gradient-to-r from-white via-slate-300 to-white bg-clip-text text-transparent mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl tracking-tight bg-gradient-to-r from-white via-slate-300 to-white bg-clip-text text-transparent mb-4">
               Skills & Certifications
             </h2>
             <motion.div 
@@ -146,8 +146,8 @@ export function Skills() {
           </motion.div>
 
           {/* Skills Section */}
-          <div className="mb-16">
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="mb-12 sm:mb-16 lg:mb-20">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
               {skillCategories.map((category, index) => {
                 const Icon = category.icon;
                 return (

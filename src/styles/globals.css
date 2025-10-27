@@ -130,8 +130,11 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -143,7 +146,7 @@
     h1 {
       font-size: var(--text-2xl);
       font-weight: var(--font-weight-medium);
-      line-height: 1.5;
+      line-height: 1.3;
       font-family: var(--font-heading);
       letter-spacing: -0.02em;
     }
@@ -151,7 +154,7 @@
     h2 {
       font-size: var(--text-xl);
       font-weight: var(--font-weight-medium);
-      line-height: 1.5;
+      line-height: 1.4;
       font-family: var(--font-heading);
       letter-spacing: -0.01em;
     }
@@ -174,7 +177,7 @@
     p {
       font-size: var(--text-base);
       font-weight: var(--font-weight-normal);
-      line-height: 1.5;
+      line-height: 1.7;
     }
 
     label {
@@ -194,6 +197,12 @@
       font-weight: var(--font-weight-normal);
       line-height: 1.5;
     }
+
+    textarea {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.6;
+    }
   }
 }
 
@@ -202,16 +211,55 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Ensure mobile viewport is responsive */
+/* Responsive typography */
 @media (max-width: 640px) {
   html {
     font-size: 14px;
   }
 }
 
+@media (min-width: 641px) and (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1920px) {
+  html {
+    font-size: 17px;
+  }
+}
+
 /* Prevent horizontal scroll on mobile */
 body {
   overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* Improve scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, #2563eb);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #60a5fa, #3b82f6);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 #0f172a;
 }
 
 /* Custom animations */
@@ -226,6 +274,54 @@ body {
 
 .animate-spin-slow {
   animation: spin-slow 8s linear infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Accessibility improvements */
+*:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+/* Improved text selection */
+::selection {
+  background-color: #3b82f6;
+  color: white;
+}
+
+::-moz-selection {
+  background-color: #3b82f6;
+  color: white;
+}
+
+/* Touch target improvements for mobile */
+@media (max-width: 768px) {
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 
 /* Print Stylesheet - Optimize for PDF generation */
