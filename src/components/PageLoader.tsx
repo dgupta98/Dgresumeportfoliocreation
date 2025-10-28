@@ -23,7 +23,7 @@ export function PageLoader() {
       className="fixed inset-0 z-[100] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center"
       onAnimationComplete={() => setIsVisible(false)}
     >
-      <div className="relative">
+      <div className="relative flex flex-col items-center justify-center">
         {/* Animated logo/spinner */}
         <motion.div
           className="relative"
@@ -97,7 +97,7 @@ export function PageLoader() {
         </motion.p>
 
         {/* Progress bar */}
-        <div className="w-48 h-1 bg-slate-700 rounded-full mt-4 overflow-hidden">
+        <div className="w-48 h-1 bg-slate-700 rounded-full mt-4 overflow-hidden mx-auto">
           <motion.div
             className="h-full bg-gradient-to-r from-blue-500 to-blue-600"
             initial={{ width: "0%" }}
