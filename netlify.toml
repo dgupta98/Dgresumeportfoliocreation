@@ -1,13 +1,13 @@
-# Netlify configuration for Figma Make project
-
-# Since Figma Make exports are pre-built static files,
-# you don't need a build command. Just deploy the files directly.
+# Netlify configuration for React + Vite application
 
 [build]
-  # No build command needed - deploy the root directory
-  publish = "."
+  command = "npm install && npm run build"
+  publish = "dist"
 
 [[redirects]]
-  from = "/src/*"
+  from = "/*"
   to = "/index.html"
   status = 200
+
+[build.environment]
+  NODE_VERSION = "20"
