@@ -26,6 +26,23 @@ export function Logo() {
             </stop>
           </linearGradient>
           
+          {/* Inner glow gradient for D */}
+          <radialGradient id="innerGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style={{ stopColor: "#e0f2fe", stopOpacity: 1 }} />
+            <stop offset="50%" style={{ stopColor: "#bae6fd", stopOpacity: 0.6 }} />
+            <stop offset="100%" style={{ stopColor: "#ffffff", stopOpacity: 1 }} />
+          </radialGradient>
+          
+          {/* Animated inner gradient */}
+          <radialGradient id="animatedInnerGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style={{ stopColor: "#dbeafe", stopOpacity: 1 }}>
+              <animate attributeName="stop-opacity" values="1;0.8;1" dur="2s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="100%" style={{ stopColor: "#eff6ff", stopOpacity: 1 }}>
+              <animate attributeName="stop-opacity" values="1;0.9;1" dur="2s" repeatCount="indefinite" />
+            </stop>
+          </radialGradient>
+          
           {/* Shadow/glow filter */}
           <filter id="glow">
             <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -36,7 +53,7 @@ export function Logo() {
           </filter>
         </defs>
         
-        {/* Stylish italic bold D with white gap */}
+        {/* Stylish italic bold D with colored gap */}
         <g transform="translate(100, 100)" filter="url(#glow)">
           {/* Outer D shape */}
           <path 
@@ -48,12 +65,26 @@ export function Logo() {
             stroke="url(#logoGrad)"
             strokeOpacity="0.6"
           />
-          {/* White gap in the middle */}
+          {/* Colored inner space with gradient glow */}
           <path 
             d="M -42 -35 L -30 -35 Q -8 -35 2 -20 Q 8 -10 8 0 Q 8 10 2 20 Q -8 35 -30 35 L -42 35 Z" 
-            fill="white" 
+            fill="url(#innerGlow)" 
             transform="skewX(-12)"
+            className="transition-all duration-500 group-hover:fill-[url(#animatedInnerGlow)]"
           />
+          {/* Accent dot in center of D */}
+          <circle 
+            cx="-18" 
+            cy="0" 
+            r="6" 
+            fill="#60a5fa"
+            transform="skewX(-12)"
+            className="transition-all duration-500 group-hover:fill-[#a78bfa]"
+            opacity="0.8"
+          >
+            <animate attributeName="r" values="6;7;6" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
+          </circle>
         </g>
         
         {/* Stylish italic bold G - proper G shape */}

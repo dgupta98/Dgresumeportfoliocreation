@@ -291,179 +291,136 @@ body {
   animation: fadeIn 0.6s ease-out forwards;
 }
 
-/* Accessibility improvements */
-*:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid #60a5fa;
-  outline-offset: 2px;
-}
-
-/* Improved text selection */
-::selection {
-  background-color: #3b82f6;
-  color: white;
-}
-
-::-moz-selection {
-  background-color: #3b82f6;
-  color: white;
-}
-
-/* Touch target improvements for mobile */
-@media (max-width: 768px) {
-  button,
-  a {
-    min-height: 44px;
-    min-width: 44px;
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
   }
 }
 
-/* Improve touch interactions */
-* {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
+.animate-blob {
+  animation: blob 7s infinite;
 }
 
-/* Smooth scrolling with offset for fixed nav */
-html {
-  scroll-padding-top: 80px;
+.animation-delay-2000 {
+  animation-delay: 2s;
 }
 
-/* Prevent iOS zoom on input focus */
-@media screen and (max-width: 768px) {
-  input,
-  textarea,
-  select {
-    font-size: 16px !important;
+.animation-delay-3000 {
+  animation-delay: 3s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.3;
   }
-}
-
-/* Better mobile menu performance */
-@media (max-width: 1023px) {
-  .backdrop-blur-xl {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-}
-
-/* Touch feedback utility */
-.touch-manipulation {
-  touch-action: manipulation;
-}
-
-.active\:scale-98:active {
-  transform: scale(0.98);
-}
-
-/* Prevent pull-to-refresh on mobile when scrolling */
-body {
-  overscroll-behavior-y: contain;
-}
-
-/* Ensure fixed navigation works on all mobile browsers */
-nav {
-  position: -webkit-sticky;
-  position: sticky;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-}
-
-/* Fix for iOS Safari address bar issues */
-@supports (-webkit-touch-callout: none) {
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 0.6;
   }
 }
 
-/* Print Stylesheet - Optimize for PDF generation */
-@media print {
-  /* Reset page margins for better PDF output */
-  @page {
-    margin: 1cm;
-    size: A4;
-  }
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
 
-  /* Hide interactive elements */
-  nav,
-  button,
-  .no-print,
-  [class*="fixed"],
-  [class*="sticky"] {
-    display: none !important;
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
   }
+  50% {
+    background-position: 100% 50%;
+  }
+}
 
-  /* Show all content */
-  body {
-    background: white !important;
-    color: black !important;
-  }
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
 
-  /* Ensure sections print on separate pages when needed */
-  section {
-    page-break-inside: avoid;
-    margin-bottom: 2rem;
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
   }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+  }
+}
 
-  /* Make sure links are visible */
-  a {
-    color: #2563EB !important;
-    text-decoration: underline;
-  }
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
 
-  /* Optimize images for print */
-  img {
-    max-width: 100% !important;
-    page-break-inside: avoid;
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
   }
+  100% {
+    transform: translateX(100%);
+  }
+}
 
-  /* Remove backgrounds for better printing */
-  * {
-    background: white !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
 
-  /* Keep text colors readable */
-  h1, h2, h3, h4, h5, h6, p, span, div {
-    color: black !important;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  /* Make gradients readable */
-  [class*="bg-gradient"],
-  [class*="text-gradient"],
-  [class*="bg-clip-text"] {
-    background: none !important;
-    -webkit-background-clip: initial !important;
-    background-clip: initial !important;
-    -webkit-text-fill-color: black !important;
-    color: black !important;
-  }
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
 
-  /* Remove transforms and animations */
-  * {
-    transform: none !important;
-    animation: none !important;
-    transition: none !important;
-  }
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
-  /* Optimize card layouts */
-  [class*="card"],
-  [class*="border"] {
-    border: 1px solid #e5e7eb !important;
-    border-radius: 0.5rem !important;
-  }
+.glass-dark {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-  /* Make contact info prominent */
-  #contact {
-    page-break-before: auto;
-  }
+/* 3D transforms */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective {
+  perspective: 1000px;
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }

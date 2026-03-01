@@ -7,6 +7,9 @@ import { Navigation } from "./components/Navigation";
 import { Hero } from "./components/Hero";
 import { MetricsCounter } from "./components/MetricsCounter";
 import { About } from "./components/About";
+import { MouseFollower } from "./components/MouseFollower";
+import { ScrollProgress } from "./components/ScrollProgress";
+import { FloatingShapes } from "./components/FloatingShapes";
 
 // Lazy load components below the fold for better performance
 const Skills = lazy(() => import("./components/Skills").then(module => ({ default: module.Skills })));
@@ -43,6 +46,9 @@ export default function App() {
       <SEOHead />
       <PageLoader />
       <EasterEggs />
+      <MouseFollower />
+      <ScrollProgress />
+      <FloatingShapes />
       
       <div className="min-h-screen bg-white">
         <Navigation />

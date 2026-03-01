@@ -3,6 +3,7 @@ import { Code, Database, Wrench, Brain, Award, ChevronDown, CheckCircle2 } from 
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { CircuitPattern } from "./CircuitPattern";
+import { Card3D } from "./Card3D";
 
 interface SkillCategory {
   title: string;

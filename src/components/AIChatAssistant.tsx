@@ -66,7 +66,7 @@ export function AIChatAssistant() {
     
     // Contact/Location
     if (lowerQ.includes("contact") || lowerQ.includes("email") || lowerQ.includes("phone") || lowerQ.includes("reach")) {
-      return "📧 Email: dgupta98@asu.edu\n📱 Phone: +1 (623) 432-6768\n💼 LinkedIn: www.linkedin.com/in/dipeshgupta09\n💻 GitHub: github.com/Dipesh30\n📍 Location: Phoenix, Arizona";
+      return "📧 Email: dipeshgupta2010@gmail.com\n📱 Phone: +1 (623) 432-6768\n💼 LinkedIn: www.linkedin.com/in/dipeshgupta09\n💻 GitHub: github.com/Dipesh30\n📍 Location: Phoenix, Arizona";
     }
     
     // Certifications

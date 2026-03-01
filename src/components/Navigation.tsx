@@ -78,12 +78,15 @@ export function Navigation() {
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 ${
-        isScrolled
-          ? "shadow-2xl shadow-blue-500/10 border-b border-slate-800"
-          : ""
+    <motion.nav 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? "bg-slate-900/90 backdrop-blur-xl border-b border-slate-700/50 shadow-xl shadow-slate-900/20" 
+          : "bg-transparent"
       }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -249,6 +252,6 @@ export function Navigation() {
           )}
         </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

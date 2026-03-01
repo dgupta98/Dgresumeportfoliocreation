@@ -9,8 +9,8 @@ export function Contact() {
     {
       icon: Mail,
       label: "Email",
-      value: "dgupta98@asu.edu",
-      href: "mailto:dgupta98@asu.edu",
+      value: "dipeshgupta2010@gmail.com",
+      href: "mailto:dipeshgupta2010@gmail.com",
     },
     {
       icon: Phone,
@@ -128,7 +128,7 @@ export function Contact() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Button size="lg" variant="outline" asChild>
-                  <a href="mailto:dgupta98@asu.edu">
+                  <a href="mailto:dipeshgupta2010@gmail.com">
                     Send me an email
                   </a>
                 </Button>

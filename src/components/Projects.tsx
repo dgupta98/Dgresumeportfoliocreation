@@ -4,6 +4,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useRef } from "react";
 import { CircuitPattern } from "./CircuitPattern";
+import { Card3D } from "./Card3D";
 
 interface Project {
   title: string;
