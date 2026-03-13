@@ -1,0 +1,13 @@
+# Netlify configuration for Figma Make project
+
+# Since Figma Make exports are pre-built static files,
+# you don't need a build command. Just deploy the files directly.
+
+[build]
+  # No build command needed - deploy the root directory
+  publish = "."
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

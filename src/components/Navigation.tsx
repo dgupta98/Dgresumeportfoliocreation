@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronRight } from "lucide-react";
-import { Button } from "./ui/button";
+import { Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
 import { motion, AnimatePresence } from "motion/react";
 import { scrollToSection as scrollToSectionUtil } from "../utils/scrollToSection";
@@ -14,8 +13,6 @@ export function Navigation() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      
-      // Update active section based on scroll position
       const sections = ["home", "about", "skills", "experience", "projects", "trainings", "education", "contact"];
       const current = sections.find(section => {
         const element = document.getElementById(section);
@@ -25,14 +22,11 @@ export function Navigation() {
         }
         return false;
       });
-      
-      if (current) {
-        setActiveSection(current);
-      }
+      if (current) setActiveSection(current);
     };
-    
+
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -42,7 +36,6 @@ export function Navigation() {
     setActiveSection(id);
   };
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
@@ -53,7 +46,6 @@ export function Navigation() {
     if (isMobileMenuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("touchstart", handleClickOutside);
-      // Prevent body scroll when menu is open
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
@@ -67,32 +59,34 @@ export function Navigation() {
   }, [isMobileMenuOpen]);
 
   const navItems = [
-    { label: "Home", id: "home" },
-    { label: "About", id: "about" },
-    { label: "Skills", id: "skills" },
-    { label: "Experience", id: "experience" },
-    { label: "Projects", id: "projects" },
-    { label: "Trainings", id: "trainings" },
-    { label: "Education", id: "education" },
-    { label: "Contact", id: "contact" },
+    { label: "ABOUT", id: "about" },
+    { label: "SKILLS", id: "skills" },
+    { label: "EXPERIENCE", id: "experience" },
+    { label: "PROJECTS", id: "projects" },
+    { label: "CONTACT", id: "contact" },
   ];
 
   return (
-    <motion.nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? "bg-slate-900/90 backdrop-blur-xl border-b border-slate-700/50 shadow-xl shadow-slate-900/20" 
-          : "bg-transparent"
-      }`}
+    <motion.nav
+      className="fixed top-0 left-0 right-0 z-50"
+      style={{
+        background: isScrolled
+          ? "rgba(10, 14, 23, 0.85)"
+          : "linear-gradient(0deg, transparent, #0a0e17 70%)",
+        backdropFilter: isScrolled ? "blur(8px)" : "none",
+        height: isScrolled ? "70px" : "100px",
+        transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+      }}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+      <div className="max-w-[1300px] mx-auto px-6 lg:px-8 h-full">
+        <div className="flex items-center justify-between h-full">
+          {/* Logo */}
           <motion.button
             onClick={() => scrollToSection("home")}
-            className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900 rounded-lg"
+            className="focus:outline-none"
             aria-label="Go to home"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -100,151 +94,105 @@ export function Navigation() {
             <Logo />
           </motion.button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          {/* Center Email - hidden on mobile */}
+          <div className="hidden lg:block">
+            <a
+              href="mailto:dipeshgupta2010@gmail.com"
+              className="text-[#ccc] hover:text-[#5eead4] transition-colors duration-300"
+              style={{ fontSize: "14px", fontWeight: 500, letterSpacing: "1px" }}
+            >
+              dipeshgupta2010@gmail.com
+            </a>
+          </div>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center" style={{ gap: "40px" }}>
             {navItems.map((item, index) => (
               <motion.button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`relative px-4 py-2 rounded-lg transition-all duration-300 group ${
-                  activeSection === item.id
-                    ? "text-blue-400"
-                    : "text-slate-300 hover:text-white"
-                }`}
+                className="relative overflow-hidden group"
+                style={{
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  letterSpacing: "1px",
+                  color: activeSection === item.id ? "#5eead4" : "#ccc",
+                  transition: "color 0.3s",
+                }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ color: "#5eead4" }}
               >
-                <span className="relative z-10 font-medium">
+                <span className="relative z-10 block transition-transform duration-300 group-hover:-translate-y-full">
                   {item.label}
                 </span>
-                
-                {/* Active indicator */}
-                {activeSection === item.id && (
-                  <motion.span
-                    layoutId="activeSection"
-                    className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-500/20 rounded-lg border border-blue-500/30"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                
-                {/* Hover effect */}
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-blue-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                {/* Animated underline */}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-300 group-hover:w-full rounded-full" />
-                
-                {/* Glow effect on active */}
-                {activeSection === item.id && (
-                  <motion.span
-                    className="absolute inset-0 bg-blue-500/20 rounded-lg blur-xl"
-                    animate={{
-                      opacity: [0.3, 0.6, 0.3],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                )}
+                <span
+                  className="absolute inset-0 flex items-center justify-center transition-transform duration-300 translate-y-full group-hover:translate-y-0"
+                  style={{ color: "#5eead4" }}
+                >
+                  {item.label}
+                </span>
               </motion.button>
             ))}
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              className={`relative ${
-                isScrolled ? "text-slate-300" : "text-white"
-              } hover:text-blue-400 hover:bg-slate-800 transition-colors touch-manipulation`}
+          <div className="md:hidden">
+            <button
+              className="text-[#ccc] hover:text-[#5eead4] transition-colors p-2"
               onClick={(e) => {
                 e.stopPropagation();
                 setIsMobileMenuOpen(!isMobileMenuOpen);
               }}
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isMobileMenuOpen}
-              aria-controls="mobile-menu"
+              style={{ WebkitTapHighlightColor: "transparent" }}
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
                     <X className="h-6 w-6" />
                   </motion.div>
                 ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
                     <Menu className="h-6 w-6" />
                   </motion.div>
                 )}
               </AnimatePresence>
-            </Button>
+            </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
               ref={mobileMenuRef}
-              id="mobile-menu"
               initial={{ maxHeight: 0, opacity: 0 }}
               animate={{ maxHeight: "500px", opacity: 1 }}
               exit={{ maxHeight: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="lg:hidden overflow-hidden"
+              className="md:hidden overflow-hidden"
             >
-              <div className="py-4 space-y-1 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border-t border-slate-800 rounded-b-2xl max-w-full">
-                {navItems.map((item, index) => (
+              <div className="py-4 space-y-1 rounded-b-2xl" style={{ background: "#0a0e17", borderTop: "1px solid #363636" }}>
+                {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={(e) => {
                       e.stopPropagation();
-                      e.preventDefault();
                       scrollToSection(item.id);
                     }}
-                    className={`flex items-center justify-between w-full text-left px-5 py-3.5 rounded-lg mx-2 transition-all duration-200 relative group touch-manipulation active:scale-98 ${
-                      activeSection === item.id
-                        ? "text-blue-400 bg-blue-500/10 border border-blue-500/30"
-                        : "text-slate-300 active:text-white active:bg-slate-800/50"
-                    }`}
+                    className="flex items-center w-full text-left px-5 py-3.5 transition-all duration-200"
                     style={{
-                      WebkitTapHighlightColor: 'transparent',
-                      touchAction: 'manipulation'
+                      color: activeSection === item.id ? "#5eead4" : "#ccc",
+                      fontSize: "14px",
+                      fontWeight: 600,
+                      letterSpacing: "1px",
+                      WebkitTapHighlightColor: "transparent",
                     }}
                     type="button"
                   >
-                    <span className="relative z-10 font-medium">{item.label}</span>
-                    
-                    <ChevronRight 
-                      className={`h-4 w-4 transition-all duration-300 ${
-                        activeSection === item.id 
-                          ? "text-blue-400 translate-x-1" 
-                          : "text-slate-500 group-hover:translate-x-1 group-hover:text-slate-300"
-                      }`}
-                    />
-                    
-                    {/* Mobile active indicator */}
-                    {activeSection === item.id && (
-                      <span
-                        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-blue-500 to-cyan-400 rounded-r-full"
-                      />
-                    )}
+                    {item.label}
                   </button>
                 ))}
               </div>

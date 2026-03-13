@@ -1,213 +1,282 @@
-import { Github, Linkedin, Mail, Phone, Sparkles } from "lucide-react";
-import { Button } from "./ui/button";
-import { motion, useScroll, useTransform } from "motion/react";
-import { NeuralBackground } from "./NeuralBackground";
-import { ResumeDownload } from "./ResumeDownload";
+import { Sparkles, Download, ArrowDown } from "lucide-react";
+import { motion } from "motion/react";
 import { useRef } from "react";
 import { scrollToSection } from "../utils/scrollToSection";
 import { TypingEffect } from "./TypingEffect";
+import avatarImg from "figma:asset/d7cd8b762ad97523a6f2be370587295278a7bc43.png";
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  });
-  
-  // Parallax transforms
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  
-  const socialLinks = [
-    { icon: Mail, href: "mailto:dipeshgupta2010@gmail.com", label: "Email" },
-    { icon: Phone, href: "tel:+16234326768", label: "Phone" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/dipeshgupta09/", label: "LinkedIn", external: true },
-    { icon: Github, href: "https://github.com/Dipesh30", label: "GitHub", external: true },
-  ];
 
   const roles = [
     "AI/ML Engineer",
     "Backend Developer",
     "IEEE Researcher",
     "Cloud Architect",
-    "Full Stack Developer"
+    "Full Stack Developer",
   ];
 
+  const handleDownloadResume = () => {
+    window.open("https://drive.google.com/file/d/1oZitNXp8Y4LehC7v9RD5XUWI7WsGzEU_/view?usp=sharing", "_blank");
+  };
+
   return (
-    <section ref={ref} id="home" className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-slate-900 via-slate-800 to-black overflow-hidden pt-16 lg:pt-20">
-      <motion.div style={{ y, opacity }}>
-        <NeuralBackground />
-      </motion.div>
-      <div className="absolute inset-0 bg-grid-slate-700 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
-      
-      {/* Enhanced floating particles with more colors */}
+    <section
+      ref={ref}
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      style={{ background: "#0a0e17" }}
+    >
+      {/* Ambient Orbs */}
       <motion.div
-        className="absolute top-20 left-10 sm:left-20 w-16 h-16 sm:w-20 sm:h-20 bg-blue-600 rounded-full blur-3xl opacity-20"
-        animate={{
-          y: [0, 30, 0],
-          x: [0, 20, 0],
+        className="absolute w-[300px] h-[300px] rounded-full"
+        style={{
+          top: "5%",
+          left: "-5%",
+          background: "radial-gradient(circle, rgba(34,211,238,0.2), transparent 70%)",
+          filter: "blur(60px)",
         }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
       />
       <motion.div
-        className="absolute bottom-20 right-10 sm:right-20 w-24 h-24 sm:w-32 sm:h-32 bg-purple-500 rounded-full blur-3xl opacity-20"
-        animate={{
-          y: [0, -40, 0],
-          x: [0, -30, 0],
+        className="absolute w-[250px] h-[250px] rounded-full"
+        style={{
+          bottom: "10%",
+          right: "-3%",
+          background: "radial-gradient(circle, rgba(139,92,246,0.15), transparent 70%)",
+          filter: "blur(50px)",
         }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ y: [0, -30, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute top-1/2 left-1/4 w-20 h-20 bg-cyan-500 rounded-full blur-3xl opacity-15"
-        animate={{
-          y: [0, 25, 0],
-          x: [0, 25, 0],
-          scale: [1, 1.2, 1],
+        className="absolute w-[200px] h-[200px] rounded-full"
+        style={{
+          top: "50%",
+          left: "15%",
+          background: "radial-gradient(circle, rgba(6,182,212,0.12), transparent 70%)",
+          filter: "blur(40px)",
         }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ y: [0, 25, 0], x: [0, 15, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8 lg:space-y-10">
-          <motion.div 
-            className="space-y-3 sm:space-y-4"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+
+      <div className="max-w-[1300px] mx-auto px-6 lg:px-8 py-20 w-full">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8">
+          {/* Left - Introduction */}
+          <motion.div
+            className="flex-1 text-center lg:text-left space-y-5"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
           >
+            {/* IEEE Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-blue-600/20 border border-blue-500/40 text-blue-100 text-sm sm:text-base mb-4 backdrop-blur-sm relative overflow-hidden"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full relative overflow-hidden"
+              style={{
+                background: "rgba(94,234,212,0.15)",
+                border: "1px solid rgba(94,234,212,0.4)",
+                fontSize: "14px",
+                color: "#5eead4",
+              }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              whileHover={{ scale: 1.05, borderColor: "rgba(59, 130, 246, 0.6)" }}
+              whileHover={{ scale: 1.05 }}
             >
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
                 animate={{ x: ["-100%", "100%"] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
               />
-              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 relative z-10" />
+              <Sparkles className="h-4 w-4 relative z-10" />
               <span className="relative z-10">Published IEEE Researcher</span>
             </motion.div>
-            
-            <motion.h1 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent px-2 animate-gradient"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            >
-              Dipesh Gupta
-            </motion.h1>
-            <motion.div 
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl px-2 min-h-[2.5rem] sm:min-h-[3rem] md:min-h-[3.5rem]"
+
+            {/* Hello text */}
+            <motion.p
+              style={{
+                fontSize: "clamp(24px, 4vw, 35px)",
+                fontWeight: 300,
+                letterSpacing: "2px",
+                color: "#5eead4",
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
             >
-              <TypingEffect 
+              Hello! I'm
+            </motion.p>
+
+            {/* Name */}
+            <motion.h1
+              style={{
+                fontSize: "clamp(40px, 6vw, 60px)",
+                fontWeight: 500,
+                letterSpacing: "2px",
+                lineHeight: "1.1",
+                color: "#eae5ec",
+                fontFamily: "'Space Grotesk', sans-serif",
+              }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              DIPESH
+              <br />
+              GUPTA
+            </motion.h1>
+          </motion.div>
+
+          {/* Center - Decorative element */}
+          <motion.div
+            className="hidden lg:flex flex-col items-center justify-center flex-1 -ml-24"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+          >
+            {/* Stylized avatar area with glow */}
+            <div className="relative w-[320px] h-[320px] flex items-center justify-center">
+              {/* Glow ring */}
+              <motion.div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  border: "2px solid rgba(94,234,212,0.3)",
+                  boxShadow: "0 0 40px rgba(94,234,212,0.15), inset 0 0 40px rgba(94,234,212,0.05)",
+                }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              />
+              <motion.div
+                className="absolute w-[280px] h-[280px] rounded-full"
+                style={{
+                  border: "1px dashed rgba(94,234,212,0.2)",
+                }}
+                animate={{ rotate: -360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              />
+              {/* Avatar image */}
+              <div className="relative z-10 w-[260px] h-[260px] rounded-full overflow-hidden">
+                <img
+                  src={avatarImg}
+                  alt="Dipesh Gupta Avatar"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              {/* Cyan glow at bottom */}
+              <div
+                className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[250px] h-[80px]"
+                style={{
+                  background: "radial-gradient(ellipse, rgba(34,211,238,0.4), transparent 70%)",
+                  filter: "blur(20px)",
+                }}
+              />
+            </div>
+          </motion.div>
+
+          {/* Right - Typing roles */}
+          <motion.div
+            className="flex-1 text-center lg:text-right"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <div
+              className="min-h-[3rem]"
+              style={{
+                fontSize: "clamp(24px, 4vw, 40px)",
+                fontWeight: 600,
+              }}
+            >
+              <TypingEffect
                 texts={roles}
-                className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+                className="bg-gradient-to-r from-[#5eead4] to-[#22d3ee] bg-clip-text text-transparent"
                 typingSpeed={80}
                 deletingSpeed={50}
                 pauseDuration={2000}
               />
-            </motion.div>
-          </motion.div>
-
-          <motion.p 
-            className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            Published IEEE researcher with 4+ years of experience in backend development, cloud computing, 
-            and machine learning systems. Proven track record of delivering measurable results with expertise 
-            in Python, Java, microservices architecture, and deep learning frameworks.
-          </motion.p>
-
-          <motion.div 
-            className="flex flex-wrap justify-center gap-3 sm:gap-4 pt-4 sm:pt-6 px-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <ResumeDownload 
-                className="bg-gradient-to-r from-blue-600 via-blue-700 to-purple-700 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 shadow-lg shadow-blue-500/30 animate-gradient"
-                size="lg"
-              />
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Button
-                onClick={() => scrollToSection("projects")}
-                variant="outline"
-                className="border-2 border-blue-400 text-blue-300 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-lg shadow-blue-500/20 backdrop-blur-sm bg-blue-950/30 relative overflow-hidden group"
-                size="lg"
-              >
-                <span className="relative z-10">View Projects</span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          <motion.div 
-            className="flex justify-center gap-5 sm:gap-6 pt-6 sm:pt-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-          >
-            {socialLinks.map((link, index) => {
-              const Icon = link.icon;
-              return (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target={link.external ? "_blank" : undefined}
-                  rel={link.external ? "noopener noreferrer" : undefined}
-                  className="p-3 rounded-full bg-slate-800/50 border border-slate-700 text-slate-400 hover:text-white hover:bg-gradient-to-br hover:from-blue-600 hover:to-purple-600 hover:border-blue-500 transition-all duration-300 backdrop-blur-sm relative group overflow-hidden"
-                  aria-label={link.label}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
-                  whileHover={{ scale: 1.15, y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100"
-                    transition={{ duration: 0.3 }}
-                  />
-                  <Icon className="h-5 w-5 sm:h-6 sm:w-6 relative z-10" />
-                </motion.a>
-              );
-            })}
+            </div>
           </motion.div>
         </div>
-      </div>
 
+        {/* Bio paragraph - centered below */}
+        <motion.p
+          className="text-center mx-auto mt-12"
+          style={{
+            maxWidth: "700px",
+            fontSize: "18px",
+            fontWeight: 300,
+            lineHeight: 1.8,
+            color: "#adacac",
+          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          Published IEEE researcher with 4+ years of experience in backend development, cloud computing,
+          and machine learning systems. Proven track record of delivering measurable results with expertise
+          in Python, Java, microservices architecture, and deep learning frameworks.
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-4 mt-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+        >
+          <motion.button
+            onClick={handleDownloadResume}
+            className="flex items-center gap-2 px-7 py-3 rounded-full"
+            style={{
+              background: "linear-gradient(135deg, #5eead4, #14b8a6)",
+              color: "#0a0e17",
+              fontWeight: 600,
+              fontSize: "15px",
+              letterSpacing: "0.5px",
+            }}
+            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(94,234,212,0.4)" }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <Download className="h-4 w-4" />
+            Download Resume
+          </motion.button>
+          <motion.button
+            onClick={() => scrollToSection("projects")}
+            className="flex items-center gap-2 px-7 py-3 rounded-full"
+            style={{
+              background: "transparent",
+              border: "1.5px solid #5eead4",
+              color: "#5eead4",
+              fontWeight: 600,
+              fontSize: "15px",
+              letterSpacing: "0.5px",
+            }}
+            whileHover={{ scale: 1.05, backgroundColor: "rgba(94,234,212,0.1)" }}
+            whileTap={{ scale: 0.98 }}
+          >
+            View Projects
+          </motion.button>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="flex justify-center mt-16"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="cursor-pointer"
+            onClick={() => scrollToSection("about")}
+          >
+            <ArrowDown className="w-5 h-5" style={{ color: "#adacac" }} />
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

@@ -96,10 +96,10 @@ export function EasterEggs() {
                   ease: "easeInOut",
                 }}
               >
-                <Rocket className="h-32 w-32 text-blue-500 mx-auto mb-4" />
+                <Rocket className="h-32 w-32 text-[#5eead4] mx-auto mb-4" />
               </motion.div>
               <motion.h2
-                className="text-4xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+                className="text-4xl bg-gradient-to-r from-[#5eead4] via-[#22d3ee] to-[#14b8a6] bg-clip-text text-transparent"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
@@ -155,9 +155,9 @@ export function EasterEggs() {
             transition={{ duration: 1 }}
           >
             {Math.random() > 0.5 ? (
-              <Zap className="h-4 w-4 text-blue-400" />
+              <Zap className="h-4 w-4 text-[#5eead4]" />
             ) : (
-              <Sparkles className="h-4 w-4 text-purple-400" />
+              <Sparkles className="h-4 w-4 text-[#22d3ee]" />
             )}
           </motion.div>
         ))}
@@ -170,7 +170,7 @@ export function EasterEggs() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="fixed bottom-20 right-8 z-[90] bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-4 rounded-2xl shadow-2xl"
+            className="fixed bottom-20 right-8 z-[90] bg-gradient-to-r from-[#5eead4] to-[#14b8a6] text-[#0a0e17] px-6 py-4 rounded-2xl shadow-2xl"
           >
             <div className="flex items-center gap-3">
               <Heart className="h-6 w-6 fill-current" />

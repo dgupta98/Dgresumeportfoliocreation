@@ -1,14 +1,9 @@
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-  
   return (
-    <footer className="bg-slate-900 text-slate-400 py-6 sm:py-8">
-      <div className="container mx-auto px-4">
-        <div className="text-center space-y-2">
-          <p className="text-xs sm:text-sm">
-            © {currentYear} Dipesh Gupta. All rights reserved.
-          </p>
-          <p className="text-xs text-slate-500">
+    <footer style={{ background: "#050810", padding: "24px 0" }}>
+      <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
+        <div className="text-center">
+          <p style={{ fontSize: "13px", color: "#adacac", opacity: 0.5 }}>
             Built with React, Tailwind CSS & Motion
           </p>
         </div>

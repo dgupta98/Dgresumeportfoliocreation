@@ -29,7 +29,7 @@ export function SEOHead() {
       { name: "twitter:image", content: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop" },
       
       // Additional SEO
-      { name: "theme-color", content: "#0F172A" },
+      { name: "theme-color", content: "#0a0e17" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
     ];

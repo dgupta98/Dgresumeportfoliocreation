@@ -29,23 +29,23 @@ export function MouseFollower() {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-6 h-6 rounded-full border-2 border-blue-500 pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border-[1.5px] border-[#5eead4] pointer-events-none z-[9999] mix-blend-difference"
         animate={{
-          x: mousePosition.x - 12,
-          y: mousePosition.y - 12,
+          x: mousePosition.x - 16,
+          y: mousePosition.y - 16,
         }}
         transition={{
           type: "spring",
-          damping: 30,
+          damping: 25,
           stiffness: 200,
           mass: 0.5,
         }}
       />
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-blue-500 pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-[#5eead4] pointer-events-none z-[9999] mix-blend-difference"
         animate={{
-          x: mousePosition.x - 4,
-          y: mousePosition.y - 4,
+          x: mousePosition.x - 3,
+          y: mousePosition.y - 3,
         }}
         transition={{
           type: "spring",

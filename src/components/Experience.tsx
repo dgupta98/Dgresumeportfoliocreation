@@ -1,10 +1,8 @@
-import { Badge } from "./ui/badge";
-import { Briefcase, MapPin, ChevronDown, ChevronUp } from "lucide-react";
-import { CircuitPattern } from "./CircuitPattern";
-import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { Briefcase } from "lucide-react";
+import { motion, useInView } from "motion/react";
+import { useRef } from "react";
 
-interface Experience {
+interface ExperienceData {
   company: string;
   location: string;
   position: string;
@@ -15,233 +13,375 @@ interface Experience {
   tags: string[];
 }
 
+const experiences: ExperienceData[] = [
+  {
+    company: "Cognizant",
+    location: "Kolkata, India",
+    position: "Product Development Specialist",
+    period: "11/2022 – 07/2025",
+    duration: "2 yrs 9 mos",
+    type: "Full-time",
+    achievements: [
+      "Led enterprise cloud migration (IBM Sterling v9.4 → v10 SaaS), migrating 8M+ records with zero downtime across production environments",
+      "Architected microservices-based data archival system for 133M+ records, achieving 30% query performance boost through optimized indexing and partitioning strategies",
+      "Built data lifecycle management framework automating purge/archive of 20M+ records/year, reducing storage costs by 25%",
+      "Designed and implemented CI/CD pipelines using Jenkins and GitLab for automated deployments across multi-tenant cloud environments",
+      "Collaborated with cross-functional teams of 15+ engineers to deliver enterprise solutions on schedule",
+    ],
+    tags: ["Cloud Migration", "Microservices", "IBM Sterling OMS", "Data Architecture", "Spring Boot", "Java", "CI/CD"],
+  },
+  {
+    company: "Vrize",
+    location: "Bangalore, India",
+    position: "Data Analyst",
+    period: "04/2021 – 11/2022",
+    duration: "1 yr 8 mos",
+    type: "Full-time",
+    achievements: [
+      "Developed order management modules handling 1M+ transactions with real-time tracking and analytics capabilities",
+      "Created 10+ interactive analytics dashboards using Power BI and Tableau for executive decision-making",
+      "Achieved 18% operational efficiency improvement through data-driven process optimization and automated reporting pipelines",
+      "Built Python-based ETL pipelines for data extraction, transformation, and loading across multiple data sources",
+    ],
+    tags: ["Data Analytics", "Python", "SQL", "Power BI", "Tableau", "ETL"],
+  },
+  {
+    company: "IntelliNature",
+    location: "Dehradun, India",
+    position: "Data Scientist Consultant",
+    period: "03/2021 – 04/2021",
+    duration: "Part-time",
+    achievements: [
+      "Developed custom web scraping automation framework for extracting structured data from dynamic web pages",
+      "Built robust data pipeline handling various page structures with error recovery and retry mechanisms",
+      "Delivered clean, analysis-ready datasets that enabled the client's research initiatives",
+    ],
+    tags: ["Python", "Web Scraping", "BeautifulSoup", "Selenium", "Data Pipeline"],
+  },
+  {
+    company: "Amazon",
+    location: "Kolkata, India",
+    position: "Virtual Customer Service",
+    period: "09/2020 – 12/2020",
+    achievements: [
+      "Resolved 100+ daily customer queries across multiple channels with high satisfaction ratings",
+      "Demonstrated CRM proficiency with Amazon's internal tools and ticketing systems",
+      "Improved first-contact resolution rates through efficient problem diagnosis and escalation protocols",
+    ],
+    tags: ["Customer Service", "CRM Systems", "Problem Solving"],
+  },
+];
+
 export function Experience() {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
-
-  const experiences: Experience[] = [
-    {
-      company: "Cognizant",
-      location: "Kolkata, India",
-      position: "Product Development Specialist",
-      period: "11/2022 - 07/2025",
-      duration: "2 yrs 9 mos",
-      type: "Full-time",
-      achievements: [
-        "Led an enterprise cloud migration from IBM Sterling Order Management v9.4 to v10 SaaS, orchestrating middleware data transfer and cloud agent deployment across 8M records with zero downtime and 0% data loss.",
-        "Architected a scalable microservices-based data archival infrastructure for 133M+ historical order records with real-time access, reducing live system database load by 15% and improving transaction query performance by 30%.",
-        "Built an intelligent data lifecycle management system with configurable time-based archival policies, automating the offloading of 20M+ aging records annually, eliminating database congestion and increasing system throughput by 10% while reducing storage costs by 25%.",
-        "Designed an end-to-end reverse logistics pipeline for returned furniture, integrating inventory, warehouse, and financial workflows across 15+ warehouses, resulting in 2% revenue increase and 3% reduction in redundant stock.",
-      ],
-      tags: ["Cloud Migration", "Microservices", "IBM Sterling OMS", "Data Architecture"],
-    },
-    {
-      company: "Vrize",
-      location: "Bangalore, India",
-      position: "Data Analyst",
-      period: "04/2021 - 11/2022",
-      duration: "1 yr 8 mos",
-      type: "Full-time",
-      achievements: [
-        "Developed core order management modules processing 1M+ annual transactions and integrated custom GTIN utilities to map 50K+ SKUs by manufacturing year across 8 warehouses, resulting in 15% reduction in product returns and improving customer satisfaction scores by 12%.",
-        "Streamlined data quality validation processes and created 10+ real-time analytics dashboards using Python, SQL, and Power BI, enabling executives to monitor 25+ logistics KPIs and driving data-informed decisions that improved operational efficiency by 18%.",
-      ],
-      tags: ["Data Analytics", "Python", "SQL", "Power BI"],
-    },
-    {
-      company: "IntelliNature Private Limited",
-      location: "Dehradun, Uttarakhand, India",
-      position: "Data Scientist Consultant",
-      period: "03/2021 - 04/2021",
-      duration: "2 mos",
-      type: "Part-time",
-      achievements: [
-        "Developed custom web scraping solution to automate data extraction across third-party portals using Python libraries like BeautifulSoup and Selenium.",
-        "Built efficient data pipeline handling dynamic page structures and transforming data into clean tabular formats for further analysis.",
-        "Collaborated with stakeholders to align output with business KPIs, improving data reliability for analytics infrastructure.",
-      ],
-      tags: ["Python", "Web Scraping", "BeautifulSoup", "Selenium", "Data Pipeline"],
-    },
-    {
-      company: "Amazon",
-      location: "Kolkata, West Bengal, India",
-      position: "Virtual Customer Service",
-      period: "09/2020 - 12/2020",
-      duration: "4 mos",
-      type: "Full-time",
-      achievements: [
-        "Handled over 100+ customer queries daily across multiple channels, specializing in order-related concerns, refund processing, and escalation handling.",
-        "Gained proficiency in Amazon's proprietary CRM systems and internal tools, helping reduce average issue resolution time and maintaining excellent CSAT scores.",
-        "Delivered accurate resolutions under high-pressure scenarios, contributing to an increase in first-contact resolution metrics.",
-      ],
-      tags: ["Customer Service", "CRM Systems", "Problem Solving", "Communication"],
-    },
-  ];
-
-  const toggleExpand = (index: number) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
+  const timelineRef = useRef(null);
+  const isInView = useInView(timelineRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="experience" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-5">
-        <CircuitPattern />
-      </div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <motion.div 
-            className="text-center mb-12 sm:mb-16 lg:mb-20"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl tracking-tight bg-gradient-to-r from-white via-slate-300 to-white bg-clip-text text-transparent mb-4">
-              Professional Experience
-            </h2>
-            <motion.div 
-              className="w-20 h-1 bg-gradient-to-r from-slate-400 via-slate-200 to-slate-400 mx-auto rounded-full"
-              initial={{ width: 0 }}
-              whileInView={{ width: 80 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+    <section id="experience" className="relative overflow-hidden" style={{ background: "#0a0e17", padding: "80px 0" }}>
+      <div className="max-w-[1300px] mx-auto px-6 lg:px-8 relative z-10">
+        {/* Heading */}
+        <motion.div
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 style={{
+            fontSize: "clamp(40px, 6vw, 70px)",
+            fontWeight: 400,
+            lineHeight: 1.1,
+            fontFamily: "'Space Grotesk', sans-serif",
+            background: "linear-gradient(0deg, #14b8a6, #ffffff)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}>
+            My career &<br />experience
+          </h2>
+          <p style={{ fontSize: "18px", color: "#adacac", marginTop: "16px" }}>
+            My journey in building scalable solutions
+          </p>
+        </motion.div>
+
+        {/* Timeline */}
+        <div ref={timelineRef} className="relative max-w-[1100px] mx-auto">
+          {/* Center line - desktop */}
+          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[3px]">
+            <motion.div
+              className="w-full h-full origin-top"
+              style={{
+                background: "linear-gradient(to bottom, transparent 0%, #5eead4 10%, #14b8a6 80%, transparent 95%)",
+              }}
+              initial={{ scaleY: 0 }}
+              animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
             />
-            <p className="text-slate-300 mt-4">My journey in building scalable solutions</p>
-          </motion.div>
+            {/* Pulsing dot at bottom */}
+            <motion.div
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[10px] h-[10px] rounded-full"
+              style={{
+                background: "#14b8a6",
+                boxShadow: "0 0 10px rgba(20,184,166,0.6), 0 0 20px rgba(20,184,166,0.3), 0 0 40px rgba(20,184,166,0.15)",
+              }}
+              animate={{ scale: [1, 1.3, 1], opacity: [0.8, 1, 0.8] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </div>
 
-          <div className="space-y-4">
+          {/* Mobile line */}
+          <div className="md:hidden absolute left-4 top-0 bottom-0 w-[2px]">
+            <motion.div
+              className="w-full h-full origin-top"
+              style={{ background: "linear-gradient(to bottom, #5eead4, #14b8a6, transparent)" }}
+              initial={{ scaleY: 0 }}
+              animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+            />
+          </div>
+
+          <div className="space-y-16 md:space-y-20">
             {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative"
-              >
-                {/* Main Card */}
-                <motion.div
-                  className={`backdrop-blur-xl bg-white border-2 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden ${
-                    expandedIndex === index
-                      ? "border-slate-500 shadow-slate-500/20"
-                      : "border-slate-300 hover:border-slate-400"
-                  }`}
-                  whileHover={{ y: -2 }}
-                  onClick={() => toggleExpand(index)}
-                >
-                  {/* Gradient accent bar */}
-                  <div className="h-1.5 bg-gradient-to-r from-slate-700 via-slate-400 to-slate-700" />
-
-                  {/* Header Section */}
-                  <div className="p-5 sm:p-6">
-                    <div className="flex items-start justify-between gap-4 mb-3">
-                      <div className="flex-1">
-                        <div className="flex items-start gap-3 mb-2">
-                          <div className="p-2 bg-gradient-to-br from-slate-200 to-slate-300 rounded-lg border border-slate-400 mt-1">
-                            <Briefcase className="h-4 w-4 text-slate-700" />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="text-lg sm:text-xl text-slate-900 mb-1">{exp.position}</h3>
-                            <div className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
-                              <span className="font-medium text-slate-800">{exp.company}</span>
-                              {exp.type && (
-                                <>
-                                  <span className="text-slate-400">•</span>
-                                  <span className="text-xs bg-slate-700 text-white px-2 py-0.5 rounded-full">
-                                    {exp.type}
-                                  </span>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-600 ml-12">
-                          <div className="flex items-center gap-1">
-                            <MapPin className="h-3.5 w-3.5" />
-                            {exp.location}
-                          </div>
-                          <span className="text-slate-400">•</span>
-                          <span>{exp.period}</span>
-                          {exp.duration && (
-                            <>
-                              <span className="text-slate-400">•</span>
-                              <span className="text-slate-700">{exp.duration}</span>
-                            </>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Expand Button */}
-                      <motion.button
-                        className="p-2 rounded-full bg-gradient-to-r from-slate-200 to-slate-300 text-slate-700 hover:from-slate-300 hover:to-slate-400 transition-colors flex-shrink-0"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        animate={{ rotate: expandedIndex === index ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <ChevronDown className="h-5 w-5" />
-                      </motion.button>
-                    </div>
-
-                    {/* Tags - Always visible */}
-                    <div className="flex flex-wrap gap-2 ml-12">
-                      {exp.tags.map((tag, tagIndex) => (
-                        <Badge
-                          key={tagIndex}
-                          className="bg-gradient-to-r from-slate-200 to-slate-300 text-slate-800 border border-slate-400 text-xs"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Expandable Achievements Section */}
-                  <AnimatePresence>
-                    {expandedIndex === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-2">
-                          <div className="border-t border-slate-300 pt-4">
-                            <h4 className="text-sm uppercase tracking-wider text-slate-700 mb-4 flex items-center gap-2">
-                              <div className="w-1 h-4 bg-gradient-to-b from-slate-600 to-slate-400 rounded-full" />
-                              Key Achievements
-                            </h4>
-                            <ul className="space-y-3 ml-12">
-                              {exp.achievements.map((achievement, achIndex) => (
-                                <motion.li
-                                  key={achIndex}
-                                  initial={{ opacity: 0, x: -20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: achIndex * 0.1 }}
-                                  className="flex gap-3 text-sm text-slate-700"
-                                >
-                                  <span className="text-slate-600 mt-1.5 flex-shrink-0">
-                                    <svg className="w-1.5 h-1.5" viewBox="0 0 6 6" fill="currentColor">
-                                      <circle cx="3" cy="3" r="3" />
-                                    </svg>
-                                  </span>
-                                  <span className="flex-1 leading-relaxed">{achievement}</span>
-                                </motion.li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              </motion.div>
+              <TimelineEntry key={exp.company} exp={exp} index={index} isLeft={index % 2 === 0} />
             ))}
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function TimelineEntry({ exp, index, isLeft }: { exp: ExperienceData; index: number; isLeft: boolean }) {
+  return (
+    <motion.div
+      className="relative"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay: index * 0.15 }}
+    >
+      {/* Desktop layout - two sides */}
+      <div
+        className="hidden md:flex items-start"
+      >
+        {/* Left content */}
+        <div className={`flex-1 min-w-0 ${isLeft ? "" : "order-3"}`}>
+          <div className={`${isLeft ? "text-right pr-8" : "text-left pl-8"}`}>
+            {/* Role info card */}
+            <div
+              className="rounded-2xl p-6 dashed-card corner-brackets"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                transition: "all 0.3s",
+              }}
+            >
+              <h3 style={{
+                fontSize: "22px",
+                fontWeight: 500,
+                color: "#eae5ec",
+                marginBottom: "6px",
+                fontFamily: "'Space Grotesk', sans-serif",
+              }}>
+                {exp.position}
+              </h3>
+              <div className={`flex flex-wrap items-center gap-2 mb-3 ${isLeft ? "justify-end" : ""}`}>
+                <span style={{ color: "#5eead4", fontWeight: 500, fontSize: "16px" }}>{exp.company}</span>
+                <span style={{ color: "#363636" }}>&bull;</span>
+                <span style={{ fontSize: "13px", color: "#adacac" }}>{exp.location}</span>
+              </div>
+
+              {/* Period badge */}
+              <div className={`flex flex-wrap gap-2 mb-4 ${isLeft ? "justify-end" : ""}`}>
+                <span
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full"
+                  style={{
+                    fontSize: "12px",
+                    background: "rgba(94,234,212,0.1)",
+                    border: "1px solid rgba(94,234,212,0.2)",
+                    color: "#5eead4",
+                  }}
+                >
+                  {exp.period}
+                </span>
+                {exp.duration && (
+                  <span
+                    className="inline-flex items-center px-3 py-1 rounded-full"
+                    style={{
+                      fontSize: "12px",
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid #363636",
+                      color: "#adacac",
+                    }}
+                  >
+                    {exp.duration}
+                  </span>
+                )}
+                {exp.type && (
+                  <span
+                    className="inline-flex items-center px-3 py-1 rounded-full"
+                    style={{
+                      fontSize: "12px",
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid #363636",
+                      color: "#adacac",
+                    }}
+                  >
+                    {exp.type}
+                  </span>
+                )}
+              </div>
+
+              {/* Tags */}
+              <div className={`flex flex-wrap gap-2 ${isLeft ? "justify-end" : ""}`}>
+                {exp.tags.map((tag, ti) => (
+                  <span key={ti} className="tag-pill whitespace-nowrap" style={{ color: "#eae5ec", fontSize: "12px" }}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Center dot */}
+        <div className="w-[60px] flex-shrink-0 flex justify-center relative order-2">
+          <div
+            className="w-5 h-5 rounded-full z-10 mt-6 flex items-center justify-center"
+            style={{
+              background: "#0a0e17",
+              border: "3px solid #5eead4",
+              boxShadow: "0 0 15px rgba(94,234,212,0.4)",
+            }}
+          >
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#5eead4" }} />
+          </div>
+        </div>
+
+        {/* Right content */}
+        <div className={`flex-1 min-w-0 ${isLeft ? "" : "order-1"}`}>
+          <div className={`${isLeft ? "text-left pl-8" : "text-right pr-8"}`}>
+            {/* Achievements card */}
+            <div
+              className="rounded-2xl p-6"
+              style={{
+                background: "rgba(255,255,255,0.02)",
+                border: "1px solid rgba(255,255,255,0.06)",
+              }}
+            >
+              <div className={`flex items-center gap-2 mb-4 ${isLeft ? "" : "justify-end"}`}>
+                <Briefcase className="h-4 w-4" style={{ color: "#5eead4" }} />
+                <span style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "2px", color: "#5eead4" }}>
+                  Key Achievements
+                </span>
+              </div>
+              <ul className="space-y-3">
+                {exp.achievements.map((ach, i) => (
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, x: isLeft ? -20 : 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.1 }}
+                    className={`flex gap-2.5 ${isLeft ? "" : "flex-row-reverse text-right"}`}
+                    style={{ fontSize: "14px", color: "#adacac", lineHeight: 1.7 }}
+                  >
+                    <span className="text-[#5eead4] mt-2 flex-shrink-0">
+                      <svg className="w-1.5 h-1.5" viewBox="0 0 6 6" fill="currentColor"><circle cx="3" cy="3" r="3" /></svg>
+                    </span>
+                    <span>{ach}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile layout - single column */}
+      <div className="md:hidden pl-10 relative">
+        {/* Mobile dot */}
+        <div
+          className="absolute left-[9px] top-6 w-[14px] h-[14px] rounded-full z-10 flex items-center justify-center"
+          style={{
+            background: "#0a0e17",
+            border: "2px solid #5eead4",
+            boxShadow: "0 0 10px rgba(94,234,212,0.3)",
+          }}
+        >
+          <div className="w-1 h-1 rounded-full" style={{ background: "#5eead4" }} />
+        </div>
+
+        <div
+          className="rounded-2xl p-5 dashed-card corner-brackets"
+          style={{ background: "rgba(255,255,255,0.03)" }}
+        >
+          <h3 style={{
+            fontSize: "20px",
+            fontWeight: 500,
+            color: "#eae5ec",
+            marginBottom: "4px",
+            fontFamily: "'Space Grotesk', sans-serif",
+          }}>
+            {exp.position}
+          </h3>
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <span style={{ color: "#5eead4", fontWeight: 500, fontSize: "15px" }}>{exp.company}</span>
+            <span style={{ color: "#363636" }}>&bull;</span>
+            <span style={{ fontSize: "13px", color: "#adacac" }}>{exp.location}</span>
+          </div>
+
+          {/* Period badges */}
+          <div className="flex flex-wrap gap-2 mb-4">
+            <span
+              className="px-3 py-1 rounded-full"
+              style={{
+                fontSize: "12px",
+                background: "rgba(94,234,212,0.1)",
+                border: "1px solid rgba(94,234,212,0.2)",
+                color: "#5eead4",
+              }}
+            >
+              {exp.period} {exp.duration && `(${exp.duration})`}
+            </span>
+            {exp.type && (
+              <span
+                className="px-3 py-1 rounded-full"
+                style={{ fontSize: "12px", background: "rgba(255,255,255,0.05)", border: "1px solid #363636", color: "#adacac" }}
+              >
+                {exp.type}
+              </span>
+            )}
+          </div>
+
+          {/* Achievements */}
+          <div style={{ borderTop: "1px solid #363636", paddingTop: "12px", marginBottom: "12px" }}>
+            <div className="flex items-center gap-2 mb-3">
+              <Briefcase className="h-3.5 w-3.5" style={{ color: "#5eead4" }} />
+              <span style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "1.5px", color: "#5eead4" }}>
+                Key Achievements
+              </span>
+            </div>
+            <ul className="space-y-2">
+              {exp.achievements.map((ach, i) => (
+                <li key={i} className="flex gap-2" style={{ fontSize: "13px", color: "#adacac", lineHeight: 1.6 }}>
+                  <span className="text-[#5eead4] mt-1.5 flex-shrink-0">
+                    <svg className="w-1.5 h-1.5" viewBox="0 0 6 6" fill="currentColor"><circle cx="3" cy="3" r="3" /></svg>
+                  </span>
+                  <span>{ach}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
+            {exp.tags.map((tag, ti) => (
+              <span key={ti} className="tag-pill" style={{ color: "#adacac", fontSize: "11px" }}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.div>
   );
 }
