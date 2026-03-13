@@ -62,8 +62,8 @@ export function Hero() {
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="max-w-[1300px] mx-auto px-6 lg:px-8 py-20 w-full">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 py-16 w-full">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10">
           {/* Left - Introduction */}
           <motion.div
             className="flex-1 text-center lg:text-left space-y-5"
@@ -131,13 +131,13 @@ export function Hero() {
 
           {/* Center - Decorative element */}
           <motion.div
-            className="hidden lg:flex flex-col items-center justify-center flex-1 -ml-24"
+            className="hidden lg:flex flex-col items-center justify-center flex-1 lg:-ml-44 xl:-ml-52"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
             {/* Stylized avatar area with glow */}
-            <div className="relative w-[320px] h-[320px] flex items-center justify-center">
+            <div className="relative w-[320px] h-[320px] flex items-center justify-center lg:-translate-x-16 xl:-translate-x-20">
               {/* Glow ring */}
               <motion.div
                 className="absolute inset-0 rounded-full"

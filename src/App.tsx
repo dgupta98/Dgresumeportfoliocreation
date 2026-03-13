@@ -46,7 +46,7 @@ export default function App() {
       <FloatingShapes />
       <SocialSidebar />
 
-      <div className="min-h-screen" style={{ background: "#0a0e17" }}>
+  <div className="min-h-screen pt-[100px]" style={{ background: "#0a0e17" }}>
         <Navigation />
 
         <Hero />

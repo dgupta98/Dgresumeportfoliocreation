@@ -67,21 +67,22 @@ export function Navigation() {
   ];
 
   return (
-    <motion.nav
+      <motion.nav
       className="fixed top-0 left-0 right-0 z-50"
       style={{
         background: isScrolled
-          ? "rgba(10, 14, 23, 0.85)"
-          : "linear-gradient(0deg, transparent, #0a0e17 70%)",
-        backdropFilter: isScrolled ? "blur(8px)" : "none",
+          ? "rgba(10, 14, 23, 0.9)"
+          : "rgba(10, 14, 23, 0.55)",
+        backdropFilter: isScrolled ? "blur(10px)" : "none",
         height: isScrolled ? "70px" : "100px",
-        transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+        boxShadow: isScrolled ? "0 4px 20px rgba(0,0,0,0.45)" : "none",
+        transition: "all 0.28s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="max-w-[1300px] mx-auto px-6 lg:px-8 h-full">
+  <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 h-full">
         <div className="flex items-center justify-between h-full">
           {/* Logo */}
           <motion.button
