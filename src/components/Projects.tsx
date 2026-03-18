@@ -18,6 +18,30 @@ export function Projects() {
 
   const projects: Project[] = [
     {
+      title: "RepoPulse",
+      subtitle: "Engineering Metrics Platform",
+      period: "Jan 2026 – May 2026",
+      summary: "Service-oriented platform that computes engineering metrics (LOC, Churn, WIP, Cycle Time) from local or GitHub repos. Extracts commit and PR history, persists metrics to database, and visualizes in Grafana dashboards.",
+      tags: ["React.js", "Spring Framework", "GitHub API", "Grafana", "Metrics Engine", "Java"],
+      image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnaXRodWIlMjBtZXRyaWNzJTIwZGFzaGJvYXJkfGVufDB8fHx8fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    },
+    {
+      title: "Zeno",
+      subtitle: "Transfer Learning Toolkit",
+      period: "Feb 2026 – Mar 2026",
+      summary: "Transfer learning project fine-tuning pretrained CNN backbones (ResNet, Inception, MobileNet) for image classification. Implemented standardized preprocessing, augmentation, training loops with early stopping, and experiment tracking for consistent model evaluation.",
+      tags: ["Python", "PyTorch", "TensorFlow", "CNN", "Transfer Learning", "CUDA"],
+      image: "https://images.unsplash.com/photo-1611532736579-6b16e2b50449?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cmFuc2Zlcilub2lkfGVufDB8fHx8fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    },
+    {
+      title: "AgileAlliance",
+      subtitle: "Agile Backlog & Sprint Planner",
+      period: "Aug 2025 – Dec 2025",
+      summary: "Jira-inspired Agile product for teams to create user stories, estimate work, plan sprints, and track progress on Kanban/Scrum boards. Implemented role-based workflows, activity history, and analytics (throughput, WIP, cycle time).",
+      tags: ["React.js", "Python", "Scrum", "Kanban", "Agile", "GitHub"],
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZ2lsZSUyMHNwcmludCUyMGJvYXJkfGVufDB8fHx8fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    },
+    {
       title: "Agent AI Workflow Automation",
       subtitle: "Personal Project",
       period: "01/2025",
