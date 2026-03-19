@@ -5,7 +5,6 @@ import { SEOHead } from "./components/SEOHead";
 import { EasterEggs } from "./components/EasterEggs";
 import { Navigation } from "./components/Navigation";
 import { Hero } from "./components/Hero";
-import { MetricsCounter } from "./components/MetricsCounter";
 import { About } from "./components/About";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { FloatingShapes } from "./components/FloatingShapes";
@@ -49,9 +48,8 @@ export default function App() {
   <div className="min-h-screen pt-[100px]" style={{ background: "#0a0e17" }}>
         <Navigation />
 
-        <Hero />
-        <MetricsCounter />
-        <About />
+  <Hero />
+  <About />
 
         <Suspense fallback={<SectionSkeleton />}>
           <Skills />
