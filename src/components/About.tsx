@@ -123,8 +123,8 @@ export function About() {
                     }}
                     onMouseEnter={() => setFlip(index, true)}
                     onMouseLeave={() => setFlip(index, false)}
-                    className="w-full h-full p-7 sm:p-9 rounded-2xl glass-card cursor-pointer overflow-hidden"
-                    style={{ perspective: 1200, minHeight: 220 }}
+                    className="w-full h-full p-4 sm:p-6 md:p-7 rounded-2xl glass-card cursor-pointer overflow-hidden"
+                    style={{ perspective: 1200, minHeight: 200 }}
                   >
                     <div
                       className="relative w-full h-full"
@@ -148,15 +148,15 @@ export function About() {
                       >
                         <div className="flex justify-center mb-4 w-full">
                           <div
-                            className="w-16 h-16 rounded-full flex items-center justify-center"
+                            className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center"
                             style={{ background: "rgba(94, 234, 212, 0.1)", border: "1px solid rgba(94, 234, 212, 0.2)" }}
                           >
-                            <Icon className="h-8 w-8" style={{ color: "#5eead4" }} />
+                            <Icon className="h-6 w-6 sm:h-7 sm:w-7" style={{ color: "#5eead4" }} />
                           </div>
                         </div>
                         <div
                           style={{
-                            fontSize: 68,
+                            fontSize: 60,
                             fontWeight: 600,
                             color: "#eae5ec",
                             lineHeight: 1.03,
@@ -175,7 +175,7 @@ export function About() {
                             </>
                           )}
                         </div>
-                        <div style={{ fontSize: 19, fontWeight: 400, color: "#adacac", marginTop: 10, textAlign: "center", width: "100%" }}>
+                        <div style={{ fontSize: 17, fontWeight: 400, color: "#adacac", marginTop: 8, textAlign: "center", width: "100%" }}>
                           {metric.label}
                         </div>
                       </div>
