@@ -1,6 +1,6 @@
 import { motion, useInView } from "motion/react";
 import { useRef, useEffect, useState, KeyboardEvent } from "react";
-import { TrendingUp, Zap, Users, Award } from "lucide-react";
+import { TrendingUp, Zap, Users, Award, Trophy } from "lucide-react";
 
 export function MetricsCounter() {
   const ref = useRef(null);
@@ -41,6 +41,14 @@ export function MetricsCounter() {
       color: "#5eead4",
       details: "Published peer-reviewed research with IEEE in deep learning and computer vision.",
     },
+    {
+      icon: Trophy,
+      label: "Hackathon Wins",
+      value: 4,
+      suffix: "",
+      color: "#5eead4",
+      details: "Won 4 hackathons including GlobeHack S1, WiCS ASU, Kiro Spark Challenge, and AI Principled Spark Challenge.",
+    },
   ];
 
   const [flipped, setFlipped] = useState<boolean[]>(() => metrics.map(() => false));
@@ -56,7 +64,7 @@ export function MetricsCounter() {
   return (
     <div ref={ref} className="py-8 sm:py-10 relative" style={{ background: "#0f1520" }}>
       <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
           {metrics.map((metric, index) => {
             const Icon = metric.icon;
             const isFlipped = flipped[index];

@@ -66,27 +66,24 @@ export function Education() {
   ];
 
   return (
-    <section id="education" className="relative overflow-hidden" style={{ background: "#0a0e17", padding: "80px 0" }}>
+    <section id="education" className="relative overflow-hidden" style={{ background: "#FAFAF8", padding: "12px 0" }}>
       <div className="max-w-[1300px] mx-auto px-6 lg:px-8 relative z-10">
         {/* Heading */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
           <h2 style={{
             fontSize: "clamp(40px, 6vw, 60px)",
             fontWeight: 400,
-            background: "linear-gradient(0deg, #14b8a6, #ffffff)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            fontFamily: "'Space Grotesk', sans-serif",
+            color: "#1A1A1A",
           }}>
             Education
           </h2>
-          <p style={{ fontSize: "18px", color: "#adacac", marginTop: "12px" }}>
+          <p style={{ fontSize: "18px", color: "#8A8A8A", marginTop: "12px" }}>
             Academic foundation and continuous learning
           </p>
         </motion.div>
@@ -95,16 +92,18 @@ export function Education() {
           {education.map((edu, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
             >
               <div
-                className="rounded-2xl cursor-pointer overflow-hidden dashed-card"
+                className="rounded-2xl cursor-pointer overflow-hidden"
                 style={{
-                  background: "rgba(255,255,255,0.03)",
-                  borderTop: "2px solid #5eead4",
+                  background: "#FFFFFF",
+                  border: "1px solid #E8E5E0",
+                  borderTop: "2px solid #92400E",
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
                   transition: "all 0.3s",
                 }}
                 onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
@@ -115,23 +114,23 @@ export function Education() {
                       <div className="flex items-start gap-3 mb-3">
                         <div
                           className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1"
-                          style={{ background: "rgba(94,234,212,0.1)", border: "1px solid rgba(94,234,212,0.2)" }}
+                          style={{ background: "rgba(146,64,14,0.12)", border: "1px solid rgba(217,119,6,0.15)" }}
                         >
-                          <GraduationCap className="h-5 w-5" style={{ color: "#5eead4" }} />
+                          <GraduationCap className="h-5 w-5" style={{ color: "#92400E" }} />
                         </div>
                         <div className="flex-1">
-                          <h3 style={{ fontSize: "20px", fontWeight: 500, color: "#eae5ec", marginBottom: "6px" }}>
+                          <h3 style={{ fontSize: "20px", fontWeight: 500, color: "#1A1A1A", marginBottom: "6px" }}>
                             {edu.degree}
                           </h3>
-                          <p style={{ fontSize: "16px", color: "#5eead4", marginBottom: "8px" }}>
+                          <p style={{ fontSize: "16px", color: "#92400E", marginBottom: "8px" }}>
                             {edu.institution}
                           </p>
-                          <div className="flex flex-wrap items-center gap-3 text-sm" style={{ color: "#adacac" }}>
+                          <div className="flex flex-wrap items-center gap-3 text-sm" style={{ color: "#8A8A8A" }}>
                             <div className="flex items-center gap-1.5">
                               <MapPin className="h-3.5 w-3.5" />
                               {edu.location}
                             </div>
-                            <span style={{ color: "#363636" }}>&bull;</span>
+                            <span style={{ color: "#E8E5E0" }}>&bull;</span>
                             <div className="flex items-center gap-1.5">
                               <Calendar className="h-3.5 w-3.5" />
                               {edu.period}
@@ -142,8 +141,8 @@ export function Education() {
 
                       <div className="flex flex-wrap items-center gap-3 ml-[52px]">
                         <div className="flex items-center gap-2 text-sm">
-                          <Award className="h-4 w-4" style={{ color: "#5eead4" }} />
-                          <span style={{ color: "#eae5ec", fontWeight: 500 }}>GPA: {edu.gpa}</span>
+                          <Award className="h-4 w-4" style={{ color: "#92400E" }} />
+                          <span style={{ color: "#1A1A1A", fontWeight: 500 }}>GPA: {edu.gpa}</span>
                         </div>
                         <span
                           className="text-xs px-3 py-1 rounded-full"
@@ -161,7 +160,7 @@ export function Education() {
                     <motion.div
                       animate={{ rotate: expandedIndex === index ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
-                      style={{ color: "#adacac" }}
+                      style={{ color: "#8A8A8A" }}
                     >
                       <ChevronDown className="h-5 w-5" />
                     </motion.div>
@@ -178,22 +177,21 @@ export function Education() {
                       className="overflow-hidden"
                     >
                       <div className="px-5 sm:px-6 pb-5 sm:pb-6">
-                        <div style={{ borderTop: "1px solid #363636", paddingTop: "16px" }} className="space-y-5">
+                        <div style={{ borderTop: "1px solid #E8E5E0", paddingTop: "16px" }} className="space-y-5">
                           {edu.coursework && (
                             <div>
-                              <h4 className="flex items-center gap-2 mb-3" style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px", color: "#adacac" }}>
-                                <BookOpen className="h-4 w-4" style={{ color: "#5eead4" }} />
+                              <h4 className="flex items-center gap-2 mb-3" style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px", color: "#8A8A8A" }}>
+                                <BookOpen className="h-4 w-4" style={{ color: "#92400E" }} />
                                 Relevant Coursework
                               </h4>
                               <div className="flex flex-wrap gap-2 ml-6">
                                 {edu.coursework.map((course, ci) => (
                                   <motion.span
                                     key={ci}
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
                                     transition={{ delay: 0.1 + ci * 0.05 }}
                                     className="tag-pill"
-                                    style={{ color: "#eae5ec" }}
                                   >
                                     {course}
                                   </motion.span>
@@ -204,21 +202,21 @@ export function Education() {
 
                           {edu.achievements && (
                             <div>
-                              <h4 className="flex items-center gap-2 mb-3" style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px", color: "#adacac" }}>
-                                <div className="w-1 h-4 rounded-full" style={{ background: "linear-gradient(to bottom, #5eead4, #14b8a6)" }} />
+                              <h4 className="flex items-center gap-2 mb-3" style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px", color: "#8A8A8A" }}>
+                                <div className="w-1 h-4 rounded-full" style={{ background: "#92400E" }} />
                                 Key Highlights
                               </h4>
                               <ul className="space-y-2 ml-6">
                                 {edu.achievements.map((ach, ai) => (
                                   <motion.li
                                     key={ai}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
                                     transition={{ delay: 0.2 + ai * 0.1 }}
                                     className="flex gap-2"
-                                    style={{ fontSize: "14px", color: "#adacac" }}
+                                    style={{ fontSize: "14px", color: "#4A4A4A" }}
                                   >
-                                    <span className="text-[#5eead4] mt-1.5 flex-shrink-0">
+                                    <span style={{ color: "#92400E" }} className="mt-1.5 flex-shrink-0">
                                       <svg className="w-1.5 h-1.5" viewBox="0 0 6 6" fill="currentColor"><circle cx="3" cy="3" r="3" /></svg>
                                     </span>
                                     <span className="leading-relaxed">{ach}</span>

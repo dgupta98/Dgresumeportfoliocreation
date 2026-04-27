@@ -112,29 +112,26 @@ export function TrainingsVolunteer() {
   ];
 
   return (
-    <section id="trainings" className="relative overflow-hidden" style={{ background: "#0a0e17", padding: "80px 0" }}>
+    <section id="trainings" className="relative overflow-hidden" style={{ background: "#FAFAF8", padding: "12px 0" }}>
       <div className="max-w-[1300px] mx-auto px-6 lg:px-8 relative z-10">
         <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          className="mb-10"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <p
+          <h2
             style={{
-              fontSize: "25px",
-              textTransform: "uppercase",
-              letterSpacing: "7px",
+              fontSize: "clamp(36px, 5vw, 56px)",
               fontWeight: 400,
-              color: "#5eead4",
-              marginBottom: "12px",
-              fontFamily: "'Space Grotesk', sans-serif",
+              color: "#1A1A1A",
+              marginBottom: "8px",
             }}
           >
-            TRAININGS & VOLUNTEER
-          </p>
-          <p style={{ fontSize: "18px", color: "#adacac" }}>Hands-on experience and community engagement</p>
+            Trainings & Volunteer
+          </h2>
+          <p style={{ fontSize: "18px", color: "#4A4A4A" }}>Hands-on experience and community engagement</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -144,7 +141,7 @@ export function TrainingsVolunteer() {
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
@@ -152,8 +149,9 @@ export function TrainingsVolunteer() {
                 <div
                   className="rounded-2xl cursor-pointer overflow-hidden h-full flex flex-col"
                   style={{
-                    background: "rgba(255,255,255,0.03)",
-                    border: "1px solid #363636",
+                    background: "#FFFFFF",
+                    border: "1px solid #E8E5E0",
+                    boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
                     transition: "all 0.3s",
                   }}
                   onClick={() => setExpandedIndex(isExpanded ? null : index)}
@@ -162,34 +160,34 @@ export function TrainingsVolunteer() {
                     <div className="flex items-start justify-between gap-3 mb-3">
                       <div
                         className="w-10 h-10 rounded-lg flex items-center justify-center"
-                        style={{ background: "rgba(94,234,212,0.1)", border: "1px solid rgba(94,234,212,0.2)" }}
+                        style={{ background: "rgba(146,64,14,0.12)", border: "1px solid rgba(217,119,6,0.15)" }}
                       >
-                        <Icon className="h-5 w-5" style={{ color: "#5eead4" }} />
+                        <Icon className="h-5 w-5" style={{ color: "#92400E" }} />
                       </div>
                       <span
                         className="px-3 py-1 rounded-full"
-                        style={{ fontSize: "11px", background: "rgba(255,255,255,0.08)", color: "#adacac", border: "1px solid #363636" }}
+                        style={{ fontSize: "11px", background: "#F0EDE8", color: "#8A8A8A", border: "1px solid #E8E5E0" }}
                       >
                         {exp.type}
                       </span>
                     </div>
 
-                    <h3 style={{ fontSize: "17px", fontWeight: 500, color: "#eae5ec", marginBottom: "4px" }}>
+                    <h3 style={{ fontSize: "17px", fontWeight: 500, color: "#1A1A1A", marginBottom: "4px" }}>
                       {exp.title}
                     </h3>
-                    <p style={{ fontSize: "13px", color: "#5eead4", marginBottom: "8px" }}>
+                    <p style={{ fontSize: "13px", color: "#92400E", marginBottom: "8px" }}>
                       {exp.organization}
                     </p>
-                    <p style={{ fontSize: "14px", color: "#adacac", lineHeight: 1.6, marginBottom: "12px", flex: 1 }}>
+                    <p style={{ fontSize: "14px", color: "#4A4A4A", lineHeight: 1.6, marginBottom: "12px", flex: 1 }}>
                       {exp.summary}
                     </p>
 
-                    <div className="flex items-center gap-3 text-xs mb-3" style={{ color: "#adacac" }}>
+                    <div className="flex items-center gap-3 text-xs mb-3" style={{ color: "#8A8A8A" }}>
                       <div className="flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
                         {exp.period}
                       </div>
-                      <span style={{ color: "#363636" }}>&bull;</span>
+                      <span style={{ color: "#E8E5E0" }}>&bull;</span>
                       <div className="flex items-center gap-1">
                         <MapPin className="h-3 w-3" />
                         {exp.location}
@@ -198,7 +196,7 @@ export function TrainingsVolunteer() {
 
                     <div className="flex flex-wrap gap-1.5">
                       {exp.tags.slice(0, 3).map((tag, ti) => (
-                        <span key={ti} className="tag-pill" style={{ color: "#adacac", fontSize: "11px" }}>{tag}</span>
+                        <span key={ti} className="tag-pill">{tag}</span>
                       ))}
                     </div>
                   </div>
@@ -212,11 +210,11 @@ export function TrainingsVolunteer() {
                         transition={{ duration: 0.3 }}
                         className="overflow-hidden"
                       >
-                        <div className="px-5 pb-5" style={{ borderTop: "1px solid #363636", paddingTop: "12px" }}>
+                        <div className="px-5 pb-5" style={{ borderTop: "1px solid #E8E5E0", paddingTop: "12px" }}>
                           <ul className="space-y-2">
                             {exp.highlights.map((h, hi) => (
-                              <li key={hi} className="flex gap-2" style={{ fontSize: "13px", color: "#adacac" }}>
-                                <span className="text-[#5eead4] mt-1.5 flex-shrink-0">
+                              <li key={hi} className="flex gap-2" style={{ fontSize: "13px", color: "#4A4A4A" }}>
+                                <span style={{ color: "#92400E" }} className="mt-1.5 flex-shrink-0">
                                   <svg className="w-1.5 h-1.5" viewBox="0 0 6 6" fill="currentColor"><circle cx="3" cy="3" r="3" /></svg>
                                 </span>
                                 <span>{h}</span>

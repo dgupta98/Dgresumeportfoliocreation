@@ -1,4 +1,4 @@
-import { Sparkles, Download, ArrowDown } from "lucide-react";
+import { Sparkles, Download } from "lucide-react";
 import { motion } from "motion/react";
 import { useRef } from "react";
 import { scrollToSection } from "../utils/scrollToSection";
@@ -24,258 +24,215 @@ export function Hero() {
     <section
       ref={ref}
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
-      style={{ background: "#0a0e17" }}
+      className="flex items-center justify-center relative overflow-hidden"
+      style={{ background: "#FAFAF8", minHeight: "calc(100vh - 72px)" }}
     >
-      {/* Ambient Orbs */}
-      <motion.div
-        className="absolute w-[300px] h-[300px] rounded-full"
-        style={{
-          top: "5%",
-          left: "-5%",
-          background: "radial-gradient(circle, rgba(34,211,238,0.2), transparent 70%)",
-          filter: "blur(60px)",
-        }}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="absolute w-[250px] h-[250px] rounded-full"
-        style={{
-          bottom: "10%",
-          right: "-3%",
-          background: "radial-gradient(circle, rgba(139,92,246,0.15), transparent 70%)",
-          filter: "blur(50px)",
-        }}
-        animate={{ y: [0, -30, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute w-[200px] h-[200px] rounded-full"
-        style={{
-          top: "50%",
-          left: "15%",
-          background: "radial-gradient(circle, rgba(6,182,212,0.12), transparent 70%)",
-          filter: "blur(40px)",
-        }}
-        animate={{ y: [0, 25, 0], x: [0, 15, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 py-16 w-full">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8 md:px-12 py-8 w-full">
+        <div className="flex flex-col lg:flex-row items-center justify-start"
+            style={{ gap: "220px" }}>
           {/* Left - Introduction */}
           <motion.div
-            className="flex-1 text-center lg:text-left space-y-5"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            className="text-left space-y-5 flex-1"
+            style={{ maxWidth: 580 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
             {/* IEEE Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full relative overflow-hidden"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full"
               style={{
-                background: "rgba(94,234,212,0.15)",
-                border: "1px solid rgba(94,234,212,0.4)",
-                fontSize: "14px",
-                color: "#5eead4",
-              }}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              whileHover={{ scale: 1.05 }}
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                animate={{ x: ["-100%", "100%"] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              />
-              <Sparkles className="h-4 w-4 relative z-10" />
-              <span className="relative z-10">Published IEEE Researcher</span>
-            </motion.div>
-
-            {/* Hello text */}
-            <motion.p
-              style={{
-                fontSize: "clamp(24px, 4vw, 35px)",
-                fontWeight: 300,
-                letterSpacing: "2px",
-                color: "#5eead4",
+                background: "rgba(146,64,14,0.12)",
+                border: "1px solid rgba(146,64,14,0.25)",
+                fontSize: "16px",
+                color: "#92400E",
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Hello! I'm
-            </motion.p>
+              <Sparkles className="h-5 w-5" />
+              <span>Published IEEE Researcher</span>
+            </motion.div>
+
+            {/* Hello text */}
+            <p style={{ fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 400, color: "#8A8A8A" }}>
+              Hello, I'm
+            </p>
 
             {/* Name */}
-            <motion.h1
-              style={{
-                fontSize: "clamp(40px, 6vw, 60px)",
-                fontWeight: 500,
-                letterSpacing: "2px",
-                lineHeight: "1.1",
-                color: "#eae5ec",
-                fontFamily: "'Space Grotesk', sans-serif",
-              }}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-            >
-              DIPESH
-              <br />
-              GUPTA
-            </motion.h1>
-          </motion.div>
+            <h1 style={{
+              fontSize: "clamp(48px, 5.5vw, 74px)",
+              fontWeight: 400,
+              lineHeight: 1.05,
+              color: "#1A1A1A",
+              whiteSpace: "nowrap",
+            }}>
+              Dipesh Gupta
+            </h1>
 
-          {/* Center - Decorative element */}
-          <motion.div
-            className="hidden lg:flex flex-col items-center justify-center flex-1 lg:-ml-44 xl:-ml-52"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-          >
-            {/* Stylized avatar area with glow */}
-            <div className="relative w-[320px] h-[320px] flex items-center justify-center lg:-translate-x-16 xl:-translate-x-20">
-              {/* Glow ring */}
-              <motion.div
-                className="absolute inset-0 rounded-full"
-                style={{
-                  border: "2px solid rgba(94,234,212,0.3)",
-                  boxShadow: "0 0 40px rgba(94,234,212,0.15), inset 0 0 40px rgba(94,234,212,0.05)",
-                }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              />
-              <motion.div
-                className="absolute w-[280px] h-[280px] rounded-full"
-                style={{
-                  border: "1px dashed rgba(94,234,212,0.2)",
-                }}
-                animate={{ rotate: -360 }}
-                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-              />
-              {/* Avatar image */}
-              <div className="relative z-10 w-[260px] h-[260px] rounded-full overflow-hidden">
-                <img
-                  src={avatarImg}
-                  alt="Dipesh Gupta Avatar"
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-              {/* Cyan glow at bottom */}
-              <div
-                className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[250px] h-[80px]"
-                style={{
-                  background: "radial-gradient(ellipse, rgba(34,211,238,0.4), transparent 70%)",
-                  filter: "blur(20px)",
-                }}
-              />
-            </div>
-          </motion.div>
-
-          {/* Right - Typing roles */}
-          <motion.div
-            className="flex-1 text-center lg:text-right"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <div
-              className="min-h-[3rem]"
-              style={{
-                fontSize: "clamp(24px, 4vw, 40px)",
-                fontWeight: 600,
-              }}
-            >
+            {/* Typing effect */}
+            <div className="min-h-[3.5rem]" style={{ fontSize: "clamp(24px, 3.2vw, 40px)", fontWeight: 500 }}>
               <TypingEffect
                 texts={roles}
-                className="bg-gradient-to-r from-[#5eead4] to-[#22d3ee] bg-clip-text text-transparent"
+                className="text-[#92400E]"
                 typingSpeed={80}
                 deletingSpeed={50}
                 pauseDuration={2000}
               />
             </div>
+
+            {/* Bio */}
+            <p style={{ fontSize: "20px", fontWeight: 400, lineHeight: 1.8, color: "#4A4A4A", maxWidth: "560px" }}>
+              I build backend systems and ML pipelines that handle millions of records without breaking a sweat. Published in IEEE, currently at ASU for my Master's.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4 pt-3 justify-start">
+              <motion.button
+                onClick={handleDownloadResume}
+                className="flex items-center gap-3 rounded-full"
+                style={{
+                  background: "#92400E",
+                  color: "#FFFFFF",
+                  fontWeight: 600,
+                  fontSize: "15px",
+                  letterSpacing: "0.03em",
+                  paddingTop: "14px",
+                  paddingBottom: "14px",
+                  paddingLeft: "36px",
+                  paddingRight: "36px",
+                  whiteSpace: "nowrap",
+                }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Download className="h-4 w-4" />
+                Download Resume
+              </motion.button>
+              <motion.button
+                onClick={() => scrollToSection("hackathons")}
+                className="flex items-center gap-3 rounded-full"
+                style={{
+                  background: "transparent",
+                  border: "1.5px solid #92400E",
+                  color: "#92400E",
+                  fontWeight: 600,
+                  fontSize: "15px",
+                  letterSpacing: "0.03em",
+                  paddingTop: "14px",
+                  paddingBottom: "14px",
+                  paddingLeft: "36px",
+                  paddingRight: "36px",
+                  whiteSpace: "nowrap",
+                }}
+                whileHover={{ scale: 1.03, backgroundColor: "rgba(146,64,14,0.08)" }}
+                whileTap={{ scale: 0.98 }}
+              >
+                See What I've Built
+              </motion.button>
+            </div>
+          </motion.div>
+
+          {/* Right - Avatar */}
+          <motion.div
+            className="flex-shrink-0 relative flex items-center justify-center"
+            style={{ width: 500, height: 500 }}
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+          >
+            {/* Warm glow blob behind avatar */}
+            <div
+              className="absolute rounded-full"
+              style={{
+                width: 440, height: 440,
+                background: "radial-gradient(circle, rgba(146,64,14,0.13) 0%, rgba(250,250,248,0) 70%)",
+                filter: "blur(36px)",
+                top: "50%", left: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            />
+
+            {/* Outer rotating ring */}
+            <motion.div
+              className="absolute rounded-full"
+              style={{
+                width: 480, height: 480,
+                top: "50%", left: "50%",
+                marginTop: -240, marginLeft: -240,
+                border: "1px solid rgba(146,64,14,0.14)",
+              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            />
+
+            {/* Inner rotating dashed ring */}
+            <motion.div
+              className="absolute rounded-full"
+              style={{
+                width: 395, height: 395,
+                top: "50%", left: "50%",
+                marginTop: -197, marginLeft: -197,
+                border: "1px dashed rgba(146,64,14,0.09)",
+              }}
+              animate={{ rotate: -360 }}
+              transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+            />
+
+            {/* Floating avatar */}
+            <motion.div
+              className="relative z-10"
+              animate={{ y: [0, -14, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              {/* Avatar circle container */}
+              <div
+                className="relative overflow-hidden"
+                style={{
+                  width: 380,
+                  height: 380,
+                  borderRadius: "50%",
+                  boxShadow: "0 16px 56px rgba(146,64,14,0.16), 0 4px 20px rgba(0,0,0,0.08)",
+                }}
+              >
+                <img
+                  src={avatarImg}
+                  alt="Dipesh Gupta"
+                  className="w-full h-full object-cover object-center"
+                />
+                {/* Edge fade overlay */}
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: "radial-gradient(circle, transparent 52%, rgba(250,250,248,0.6) 72%, rgba(250,250,248,0.95) 90%)",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+            </motion.div>
+
+            {/* Floating accent dots */}
+            <motion.div
+              className="absolute rounded-full z-20"
+              style={{ width: 13, height: 13, background: "#92400E", top: 65, right: 55, opacity: 0.75 }}
+              animate={{ y: [0, -9, 0], opacity: [0.75, 1, 0.75] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+            />
+            <motion.div
+              className="absolute rounded-full z-20"
+              style={{ width: 8, height: 8, background: "#92400E", bottom: 85, left: 50, opacity: 0.4 }}
+              animate={{ y: [0, 7, 0], opacity: [0.4, 0.65, 0.4] }}
+              transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+            />
+            <motion.div
+              className="absolute rounded-full z-20"
+              style={{ width: 6, height: 6, background: "#92400E", top: 140, left: 35, opacity: 0.3 }}
+              animate={{ y: [0, -5, 0], opacity: [0.3, 0.5, 0.3] }}
+              transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            />
           </motion.div>
         </div>
-
-        {/* Bio paragraph - centered below */}
-        <motion.p
-          className="text-center mx-auto mt-12"
-          style={{
-            maxWidth: "700px",
-            fontSize: "18px",
-            fontWeight: 300,
-            lineHeight: 1.8,
-            color: "#adacac",
-          }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          Published IEEE researcher with 4+ years of experience in backend development, cloud computing,
-          and machine learning systems. Proven track record of delivering measurable results with expertise
-          in Python, Java, microservices architecture, and deep learning frameworks.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-4 mt-10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <motion.button
-            onClick={handleDownloadResume}
-            className="flex items-center gap-2 px-7 py-3 rounded-full"
-            style={{
-              background: "linear-gradient(135deg, #5eead4, #14b8a6)",
-              color: "#0a0e17",
-              fontWeight: 600,
-              fontSize: "15px",
-              letterSpacing: "0.5px",
-            }}
-            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(94,234,212,0.4)" }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <Download className="h-4 w-4" />
-            Download Resume
-          </motion.button>
-          <motion.button
-            onClick={() => scrollToSection("projects")}
-            className="flex items-center gap-2 px-7 py-3 rounded-full"
-            style={{
-              background: "transparent",
-              border: "1.5px solid #5eead4",
-              color: "#5eead4",
-              fontWeight: 600,
-              fontSize: "15px",
-              letterSpacing: "0.5px",
-            }}
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(94,234,212,0.1)" }}
-            whileTap={{ scale: 0.98 }}
-          >
-            View Projects
-          </motion.button>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="flex justify-center mt-16"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="cursor-pointer"
-            onClick={() => scrollToSection("about")}
-          >
-            <ArrowDown className="w-5 h-5" style={{ color: "#adacac" }} />
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import { Mail, Phone, Linkedin, Github, MapPin, ExternalLink, Download } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, MapPin, Download } from "lucide-react";
 import { motion } from "motion/react";
 
 export function Contact() {
@@ -7,206 +7,69 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden" style={{ background: "#0a0e17", padding: "80px 0" }}>
-      <div className="max-w-[1300px] mx-auto px-6 lg:px-8 relative z-10">
-        {/* Heading */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 style={{
-            fontSize: "clamp(40px, 6vw, 60px)",
-            fontWeight: 400,
-            textTransform: "uppercase",
-            color: "#eae5ec",
-            letterSpacing: "2px",
-            fontFamily: "'Space Grotesk', sans-serif",
-          }}>
-            GET IN TOUCH
+    <section id="contact" className="relative overflow-hidden" style={{ background: "#FAFAF8", padding: "12px 0" }}>
+      <div className="max-w-[700px] mx-auto px-6 lg:px-8 relative z-10 text-center">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+          <h2 style={{ fontSize: "clamp(40px, 6vw, 60px)", fontWeight: 400, color: "#1A1A1A",  }}>
+            Get in touch
           </h2>
-          <p className="mx-auto mt-4" style={{
-            fontSize: "18px",
-            color: "#adacac",
-            maxWidth: "600px",
-            lineHeight: 1.7,
-          }}>
-            I'm currently seeking AI/ML engineering or backend development roles.
-            Feel free to reach out if you'd like to discuss opportunities or collaborations!
+          <p className="mx-auto mt-3" style={{ fontSize: "18px", color: "#4A4A4A", maxWidth: "500px", lineHeight: 1.7 }}>
+            I'm currently seeking AI/ML engineering or backend development roles. Feel free to reach out!
           </p>
         </motion.div>
 
-        {/* Three columns */}
-        <div className="grid md:grid-cols-3 gap-10 lg:gap-16">
-          {/* Column 1 - Contact Details */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <p style={{ fontSize: "14px", textTransform: "uppercase", letterSpacing: "4px", color: "#5eead4", marginBottom: "24px", fontWeight: 600 }}>
-              Contact Details
-            </p>
-            <div className="space-y-5">
-              {[
-                {
-                  label: "Email",
-                  value: "dipeshgupta2010@gmail.com",
-                  href: "mailto:dipeshgupta2010@gmail.com",
-                  icon: <Mail className="h-6 w-6" style={{ color: "#5eead4" }} />,
-                },
-                {
-                  label: "Phone",
-                  value: "+1 (623) 432-6768",
-                  href: "tel:+16234326768",
-                  icon: <Phone className="h-6 w-6" style={{ color: "#5eead4" }} />,
-                },
-                {
-                  label: "Location",
-                  value: "Phoenix, Arizona",
-                  href: null,
-                  icon: <MapPin className="h-6 w-6" style={{ color: "#5eead4" }} />,
-                },
-              ].map((item, i) => {
-                const content = (
-                  <div
-                    key={i}
-                    className="flex items-center gap-4 p-4 rounded-xl group transition-all duration-300"
-                    style={{
-                      background: "rgba(94,234,212,0.04)",
-                      border: "1px solid rgba(94,234,212,0.1)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = "rgba(94,234,212,0.08)";
-                      e.currentTarget.style.borderColor = "rgba(94,234,212,0.25)";
-                      e.currentTarget.style.boxShadow = "0 0 20px rgba(94,234,212,0.08)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "rgba(94,234,212,0.04)";
-                      e.currentTarget.style.borderColor = "rgba(94,234,212,0.1)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                  >
-                    <div
-                      className="flex items-center justify-center w-12 h-12 rounded-xl shrink-0"
-                      style={{
-                        background: "rgba(94,234,212,0.12)",
-                        border: "1px solid rgba(94,234,212,0.25)",
-                      }}
-                    >
-                      {item.icon}
-                    </div>
-                    <div>
-                      <p style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "2px", color: "#5eead4", marginBottom: "4px", fontWeight: 500 }}>
-                        {item.label}
-                      </p>
-                      <p style={{ fontSize: "17px", color: "#eae5ec", fontWeight: 400 }}>
-                        {item.value}
-                      </p>
-                    </div>
-                  </div>
-                );
-                return item.href ? (
-                  <a key={i} href={item.href} className="block" style={{ textDecoration: "none" }}>
-                    {content}
-                  </a>
-                ) : (
-                  content
-                );
-              })}
-            </div>
-          </motion.div>
+        {/* Contact items */}
+        <motion.div className="mt-10 space-y-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}>
+          {[
+            { icon: Mail, label: "dipeshgupta2010@gmail.com", href: "mailto:dipeshgupta2010@gmail.com" },
+            { icon: Phone, label: "+1 (623) 432-6768", href: "tel:+16234326768" },
+            { icon: MapPin, label: "Phoenix, Arizona", href: null },
+          ].map((item, i) => {
+            const Icon = item.icon;
+            const inner = (
+              <div key={i} className="flex items-center justify-center gap-3 py-3 transition-colors" style={{ color: "#4A4A4A" }}>
+                <Icon className="h-5 w-5" style={{ color: "#92400E" }} />
+                <span style={{ fontSize: "16px" }}>{item.label}</span>
+              </div>
+            );
+            return item.href ? <a key={i} href={item.href} className="block hover:text-[#92400E]">{inner}</a> : inner;
+          })}
+        </motion.div>
 
-          {/* Column 2 - Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <p style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "2px", color: "#5eead4", marginBottom: "16px" }}>
-              Social
-            </p>
-            <div className="space-y-4">
-              {[
-                { label: "linkedin.com/in/dipeshgupta09", href: "https://www.linkedin.com/in/dipeshgupta09/" },
-                { label: "github.com/Dipesh30", href: "https://github.com/Dipesh30" },
-                { label: "dipeshgupta2010@gmail.com", href: "mailto:dipeshgupta2010@gmail.com" },
-              ].map((link, i) => (
-                <a
-                  key={i}
-                  href={link.href}
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="flex items-center justify-between py-3 group"
-                  style={{
-                    borderBottom: "1px solid #363636",
-                    fontSize: "16px",
-                    color: "#eae5ec",
-                    transition: "all 0.3s",
-                  }}
-                >
-                  <span className="group-hover:text-[#5eead4] transition-colors">{link.label}</span>
-                  <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: "#5eead4" }} />
-                </a>
-              ))}
-            </div>
-          </motion.div>
+        {/* Social links */}
+        <motion.div className="flex items-center justify-center gap-6 mt-8" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }}>
+          {[
+            { icon: Linkedin, href: "https://www.linkedin.com/in/dipeshgupta09/", label: "LinkedIn" },
+            { icon: Github, href: "https://github.com/Dipesh30", label: "GitHub" },
+          ].map((link, i) => {
+            const Icon = link.icon;
+            return (
+              <a key={i} href={link.href} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 transition-colors" style={{ color: "#8A8A8A", fontSize: "15px" }}>
+                <Icon className="h-4 w-4" />
+                <span>{link.label}</span>
+              </a>
+            );
+          })}
+        </motion.div>
 
-          {/* Column 3 - CTA & Credits */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="space-y-4"
-          >
-            <motion.button
-              onClick={handleDownloadResume}
-              className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full"
-              style={{
-                background: "linear-gradient(135deg, #5eead4, #14b8a6)",
-                color: "#0a0e17",
-                fontWeight: 600,
-                fontSize: "15px",
-              }}
-              whileHover={{ scale: 1.03, boxShadow: "0 0 30px rgba(94,234,212,0.3)" }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Download className="h-4 w-4" />
-              Download Resume
-            </motion.button>
+        {/* CTA buttons */}
+        <motion.div className="flex flex-wrap justify-center gap-4 mt-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}>
+          <button onClick={handleDownloadResume} className="flex items-center gap-2 px-7 py-3 rounded-full"
+            style={{ background: "#92400E", color: "#FFFFFF", fontWeight: 600, fontSize: "15px", border: "none", cursor: "pointer" }}>
+            <Download className="h-4 w-4" /> Download Resume
+          </button>
+          <a href="mailto:dipeshgupta2010@gmail.com" className="flex items-center gap-2 px-7 py-3 rounded-full"
+            style={{ border: "1.5px solid #92400E", color: "#92400E", fontWeight: 600, fontSize: "15px" }}>
+            <Mail className="h-4 w-4" /> Send me an email
+          </a>
+        </motion.div>
 
-            <motion.a
-              href="mailto:dipeshgupta2010@gmail.com"
-              className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full"
-              style={{
-                border: "1.5px solid #5eead4",
-                color: "#5eead4",
-                fontWeight: 600,
-                fontSize: "15px",
-                display: "flex",
-              }}
-              whileHover={{ scale: 1.03, backgroundColor: "rgba(94,234,212,0.1)" }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Mail className="h-4 w-4" />
-              Send me an email
-            </motion.a>
-
-            <div className="pt-6 text-center">
-              <p style={{ fontSize: "16px", color: "#adacac" }}>
-                Designed and Developed by{" "}
-                <span style={{ color: "#5eead4" }}>Dipesh Gupta</span>
-              </p>
-              <p style={{ fontSize: "14px", color: "#adacac", opacity: 0.5, marginTop: "4px" }}>
-                &copy; 2025
-              </p>
-            </div>
-          </motion.div>
+        <div className="mt-12">
+          <p style={{ fontSize: "14px", color: "#8A8A8A" }}>
+            Designed and Developed by <span style={{ color: "#92400E" }}>Dipesh Gupta</span>
+          </p>
+          <p style={{ fontSize: "13px", color: "#8A8A8A", opacity: 0.5, marginTop: "4px" }}>&copy; 2026</p>
         </div>
       </div>
     </section>

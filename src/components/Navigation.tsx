@@ -13,7 +13,7 @@ export function Navigation() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      const sections = ["home", "about", "skills", "experience", "projects", "trainings", "education", "contact"];
+      const sections = ["home", "about", "experience", "hackathons", "projects", "trainings", "education", "contact"];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -24,7 +24,6 @@ export function Navigation() {
       });
       if (current) setActiveSection(current);
     };
-
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
@@ -42,7 +41,6 @@ export function Navigation() {
         setIsMobileMenuOpen(false);
       }
     };
-
     if (isMobileMenuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("touchstart", handleClickOutside);
@@ -50,7 +48,6 @@ export function Navigation() {
     } else {
       document.body.style.overflow = "unset";
     }
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("touchstart", handleClickOutside);
@@ -59,107 +56,71 @@ export function Navigation() {
   }, [isMobileMenuOpen]);
 
   const navItems = [
-    { label: "ABOUT", id: "about" },
-    { label: "SKILLS", id: "skills" },
-    { label: "EXPERIENCE", id: "experience" },
-    { label: "PROJECTS", id: "projects" },
-    { label: "CONTACT", id: "contact" },
+    { label: "About", id: "about" },
+    { label: "Experience", id: "experience" },
+    { label: "Hackathons", id: "hackathons" },
+    { label: "Projects", id: "projects" },
+    { label: "Contact", id: "contact" },
   ];
 
   return (
-      <motion.nav
+    <nav
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: isScrolled
-          ? "rgba(10, 14, 23, 0.9)"
-          : "rgba(10, 14, 23, 0.55)",
-        backdropFilter: isScrolled ? "blur(10px)" : "none",
-        height: isScrolled ? "70px" : "100px",
-        boxShadow: isScrolled ? "0 4px 20px rgba(0,0,0,0.45)" : "none",
-        transition: "all 0.28s cubic-bezier(0.4, 0, 0.2, 1)",
+        background: "#FFFFFF",
+        borderBottom: "1px solid #E8E5E0",
+        boxShadow: isScrolled ? "0 1px 8px rgba(0,0,0,0.04)" : "none",
+        height: "72px",
+        transition: "box-shadow 0.3s ease",
       }}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
     >
-  <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 h-full">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 h-full">
         <div className="flex items-center justify-between h-full">
-          {/* Logo */}
-          <motion.button
+          <button
             onClick={() => scrollToSection("home")}
             className="focus:outline-none"
             aria-label="Go to home"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
             <Logo />
-          </motion.button>
-
-          {/* Center Email - hidden on mobile */}
-          <div className="hidden lg:block">
-            <a
-              href="mailto:dipeshgupta2010@gmail.com"
-              className="text-[#ccc] hover:text-[#5eead4] transition-colors duration-300"
-              style={{ fontSize: "14px", fontWeight: 500, letterSpacing: "1px" }}
-            >
-              dipeshgupta2010@gmail.com
-            </a>
-          </div>
+          </button>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center" style={{ gap: "40px" }}>
-            {navItems.map((item, index) => (
-              <motion.button
+          <div className="hidden md:flex items-center" style={{ gap: "36px" }}>
+            {navItems.map((item) => (
+              <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="relative overflow-hidden group"
+                className="relative pb-1"
                 style={{
                   fontSize: "14px",
-                  fontWeight: 600,
-                  letterSpacing: "1px",
-                  color: activeSection === item.id ? "#5eead4" : "#ccc",
-                  transition: "color 0.3s",
+                  fontWeight: 500,
+                  color: activeSection === item.id ? "#92400E" : "#4A4A4A",
+                  transition: "color 0.2s",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
                 }}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ color: "#5eead4" }}
               >
-                <span className="relative z-10 block transition-transform duration-300 group-hover:-translate-y-full">
-                  {item.label}
-                </span>
-                <span
-                  className="absolute inset-0 flex items-center justify-center transition-transform duration-300 translate-y-full group-hover:translate-y-0"
-                  style={{ color: "#5eead4" }}
-                >
-                  {item.label}
-                </span>
-              </motion.button>
+                {item.label}
+                {activeSection === item.id && (
+                  <span
+                    className="absolute bottom-0 left-0 right-0 h-[2px]"
+                    style={{ background: "#92400E", borderRadius: "1px" }}
+                  />
+                )}
+              </button>
             ))}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
-              className="text-[#ccc] hover:text-[#5eead4] transition-colors p-2"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsMobileMenuOpen(!isMobileMenuOpen);
-              }}
+              className="p-2"
+              onClick={(e) => { e.stopPropagation(); setIsMobileMenuOpen(!isMobileMenuOpen); }}
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-              style={{ WebkitTapHighlightColor: "transparent" }}
+              style={{ color: "#1A1A1A", WebkitTapHighlightColor: "transparent" }}
             >
-              <AnimatePresence mode="wait">
-                {isMobileMenuOpen ? (
-                  <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
-                    <X className="h-6 w-6" />
-                  </motion.div>
-                ) : (
-                  <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
-                    <Menu className="h-6 w-6" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
@@ -170,25 +131,21 @@ export function Navigation() {
             <motion.div
               ref={mobileMenuRef}
               initial={{ maxHeight: 0, opacity: 0 }}
-              animate={{ maxHeight: "500px", opacity: 1 }}
+              animate={{ maxHeight: "400px", opacity: 1 }}
               exit={{ maxHeight: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
               className="md:hidden overflow-hidden"
             >
-              <div className="py-4 space-y-1 rounded-b-2xl" style={{ background: "#0a0e17", borderTop: "1px solid #363636" }}>
+              <div className="py-3 space-y-1" style={{ background: "#FFFFFF", borderTop: "1px solid #E8E5E0" }}>
                 {navItems.map((item) => (
                   <button
                     key={item.id}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      scrollToSection(item.id);
-                    }}
-                    className="flex items-center w-full text-left px-5 py-3.5 transition-all duration-200"
+                    onClick={(e) => { e.stopPropagation(); scrollToSection(item.id); }}
+                    className="flex items-center w-full text-left px-5 py-3"
                     style={{
-                      color: activeSection === item.id ? "#5eead4" : "#ccc",
-                      fontSize: "14px",
-                      fontWeight: 600,
-                      letterSpacing: "1px",
+                      color: activeSection === item.id ? "#92400E" : "#4A4A4A",
+                      fontSize: "15px",
+                      fontWeight: 500,
                       WebkitTapHighlightColor: "transparent",
                     }}
                     type="button"
@@ -201,6 +158,6 @@ export function Navigation() {
           )}
         </AnimatePresence>
       </div>
-    </motion.nav>
+    </nav>
   );
 }

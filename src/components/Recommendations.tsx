@@ -45,36 +45,34 @@ export function Recommendations() {
   const doubledRecs = [...recommendations, ...recommendations];
 
   return (
-    <section className="relative overflow-hidden" style={{ background: "#050810", padding: "80px 0" }}>
+    <section className="relative overflow-hidden" style={{ background: "#F5F3EF", padding: "12px 0" }}>
       <div className="max-w-[1300px] mx-auto px-6 lg:px-8 mb-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <p
+          <h2
             style={{
-              fontSize: "25px",
-              textTransform: "uppercase",
-              letterSpacing: "7px",
+              fontSize: "clamp(36px, 5vw, 56px)",
               fontWeight: 400,
-              color: "#5eead4",
+              color: "#1A1A1A",
               marginBottom: "8px",
-              fontFamily: "'Space Grotesk', sans-serif",
             }}
           >
-            RECOMMENDATIONS
-          </p>
-          <p style={{ fontSize: "18px", color: "#adacac" }}>What colleagues and mentors say</p>
+            Recommendations
+          </h2>
+          <p style={{ fontSize: "18px", color: "#4A4A4A" }}>What colleagues and mentors say</p>
+          <p style={{ fontSize: "15px", color: "#8A8A8A", marginTop: "4px" }}>4 recommendations from LinkedIn</p>
         </motion.div>
       </div>
 
       {/* Marquee */}
       <div className="relative overflow-hidden">
         {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 z-10" style={{ background: "linear-gradient(to right, #050810, transparent)" }} />
-        <div className="absolute right-0 top-0 bottom-0 w-20 z-10" style={{ background: "linear-gradient(to left, #050810, transparent)" }} />
+        <div className="absolute left-0 top-0 bottom-0 w-20 z-10" style={{ background: "linear-gradient(to right, #F5F3EF, transparent)" }} />
+        <div className="absolute right-0 top-0 bottom-0 w-20 z-10" style={{ background: "linear-gradient(to left, #F5F3EF, transparent)" }} />
 
         <div className="flex animate-marquee hover:[animation-play-state:paused]" style={{ width: "fit-content" }}>
           {doubledRecs.map((rec, index) => (
@@ -82,16 +80,16 @@ export function Recommendations() {
               key={index}
               className="flex-shrink-0 w-[380px] mx-3 p-6 rounded-2xl"
               style={{
-                background: "rgba(255,255,255,0.03)",
-                backdropFilter: "blur(8px)",
-                border: "1px solid #363636",
+                background: "#FFFFFF",
+                border: "1px solid #E8E5E0",
+                boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
               }}
             >
               {/* Quote icon */}
-              <Quote className="h-8 w-8 mb-4" style={{ color: "rgba(94,234,212,0.2)" }} />
+              <Quote className="h-8 w-8 mb-4" style={{ color: "rgba(217,119,6,0.15)" }} />
 
               {/* Text */}
-              <p style={{ fontSize: "16px", color: "#eae5ec", lineHeight: 1.7, fontStyle: "italic", marginBottom: "16px" }}>
+              <p style={{ fontSize: "16px", color: "#4A4A4A", lineHeight: 1.7, fontStyle: "italic", marginBottom: "16px" }}>
                 "{rec.text}"
               </p>
 
@@ -103,20 +101,20 @@ export function Recommendations() {
               </div>
 
               {/* Author */}
-              <div className="flex items-center justify-between" style={{ borderTop: "1px solid #363636", paddingTop: "12px" }}>
+              <div className="flex items-center justify-between" style={{ borderTop: "1px solid #E8E5E0", paddingTop: "12px" }}>
                 <div>
-                  <p style={{ fontSize: "15px", fontWeight: 500, color: "#5eead4" }}>{rec.name}</p>
-                  <p style={{ fontSize: "12px", color: "#adacac" }}>{rec.role}</p>
-                  <p style={{ fontSize: "11px", color: "#363636", marginTop: "4px" }}>{rec.relationship}</p>
+                  <p style={{ fontSize: "15px", fontWeight: 500, color: "#92400E" }}>{rec.name}</p>
+                  <p style={{ fontSize: "12px", color: "#4A4A4A" }}>{rec.role}</p>
+                  <p style={{ fontSize: "11px", color: "#8A8A8A", marginTop: "4px" }}>{rec.relationship}</p>
                 </div>
                 <a
                   href="https://www.linkedin.com/in/dipeshgupta09/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-lg transition-colors"
-                  style={{ background: "rgba(94,234,212,0.1)" }}
+                  style={{ background: "rgba(146,64,14,0.12)" }}
                 >
-                  <Linkedin className="h-4 w-4" style={{ color: "#5eead4" }} />
+                  <Linkedin className="h-4 w-4" style={{ color: "#92400E" }} />
                 </a>
               </div>
             </div>
@@ -126,23 +124,21 @@ export function Recommendations() {
 
       {/* LinkedIn CTA */}
       <div className="max-w-[1300px] mx-auto px-6 lg:px-8 mt-10 text-center">
-        <motion.a
+        <a
           href="https://www.linkedin.com/in/dipeshgupta09/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-full transition-all"
           style={{
-            background: "rgba(94,234,212,0.1)",
-            border: "1px solid rgba(94,234,212,0.3)",
-            color: "#5eead4",
+            background: "rgba(146,64,14,0.12)",
+            border: "1px solid rgba(146,64,14,0.25)",
+            color: "#92400E",
             fontSize: "14px",
           }}
-          whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(94,234,212,0.2)" }}
-          whileTap={{ scale: 0.95 }}
         >
           <Linkedin className="h-4 w-4" />
           View LinkedIn Profile
-        </motion.a>
+        </a>
       </div>
     </section>
   );
